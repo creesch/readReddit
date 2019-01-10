@@ -40,7 +40,10 @@
         const jsonUrl = `https://old.reddit.com${location.pathname}.json`;
         console.log(jsonUrl);
         $.getJSON(jsonUrl, {raw_json : 1}).done((data) => {
-
+            if(!data[0].data.children[0].data.is_self || !data[0].data.children[0].data.selftext_html) {
+                $body.removeClass('rd-overlayActive');
+                return;
+            }
             const selfTextHTML = DOMPurify.sanitize(data[0].data.children[0].data.selftext_html.match(mdRegex)[1]);
 
             const continuedInComments = handleComments(data[1].data.children, data[0].data.children[0].data.author);
