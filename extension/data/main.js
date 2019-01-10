@@ -32,7 +32,9 @@
     // Show the overlay with readable text.
     function activateOverlay() {
         const colorMode = currentSettings.colorMode;
-
+        if(colorMode === 'dark') {
+            $body.addClass('rd-dark');
+        }
         $body.addClass('rd-overlayActive');
         // Create the api request URL. Done like this so it will also work on reddit redesign.
         const jsonUrl = `https://old.reddit.com${location.pathname}.json`;
@@ -69,12 +71,12 @@
             $overlay.on('click', '#rd-colorMode', function() {
                 const $this = $(this);
                 if($this.attr('data-mode') === 'light') {
-                    chrome.storage.local.set('colorMode', 'dark');
+                    chrome.storage.local.set({'colorMode': 'dark'});
                     currentSettings.colorScheme = 'dark';
                     $body.addClass('rd-dark');
                     $this.attr('data-mode', 'dark');
                 } else {
-                    chrome.storage.local.set('colorMode', 'light');
+                    chrome.storage.local.set({'colorMode': 'light'});
                     currentSettings.colorScheme = 'light';
                     $body.removeClass('rd-dark');
                     $this.attr('data-mode', 'light');
@@ -89,12 +91,11 @@
     }
 
     function addIcon() {
-        chrome.storage.local.get(['fontFamily', 'fontSize', 'textWidth', 'colorScheme'], function(result) {
-
+        chrome.storage.local.get(['fontFamily', 'fontSize', 'textWidth', 'colorMode'], function(result) {
             currentSettings.fontFamily = result.fontFamily || defaultSettings.fontFamily;
             currentSettings.fontSize = result.fontSize || defaultSettings.fontSize;
             currentSettings.textWidth = result.textWidth || defaultSettings.textWidth;
-            currentSettings.colorScheme = result.colorScheme || defaultSettings.colorScheme;
+            currentSettings.colorMode = result.colorMode || defaultSettings.colorMode;
 
             // Insert css that depends on variables.
             $('head').append(`
