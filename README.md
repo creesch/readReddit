@@ -1,16 +1,28 @@
 
+![Logo](https://www.creesch.com/dump/img/img_5c370feea94c2.png)  
 
 Readable text posts on reddit
 ========================
 
-Reformat text posts into a nice readable format without any distractions. Currently it does this by grabbing the text of the post and putting it in a nice overlay that blocks out the rest of the page and formats the text to have a nice balance in font size, line height and line width. 
+Reformat text posts from this:  
+![Before](https://www.creesch.com/dump/img/img_5c37109ddbe6c.png)
 
-Features:
+Into a nice readable format without any distractions. Like this:
+
+![After](https://www.creesch.com/dump/img/img_5c3710ca05f08.png)
+
+Or if you are more into dark themes: 
+
+![After dark](https://www.creesch.com/dump/img/img_5c3710f5dd1c4.png)
+
+# Features
 
 - Will also go over comments to look for first level comments by the author to include these in the formatted text. Useful for those text posts where the author runs out of space and continues their story in the comments.
 - Light and dark mode. 
 
-Future: 
+# Future: 
+
+Some things I might build in the future. 
 
 - Custom theme creation. 
 - Choose your own font.
