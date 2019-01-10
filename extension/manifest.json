@@ -16,7 +16,6 @@
     },
     "permissions": [
         "https://*.reddit.com/",
-        "http://*.reddit.com/",
         "storage"
     ],
     "icons": {
@@ -28,7 +27,6 @@
         {
             "run_at": "document_end",
             "matches": [
-                "http://*.reddit.com/*",
                 "https://*.reddit.com/*"
             ],
             "css": [
