@@ -1,27 +1,59 @@
 <!doctype html>
 <html>
 	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="../styles/global.css" media="all">
 		<style>
 			body {
+				font-family: Verdana,Geneva,sans-serif; ; 
+				font-size: 14px;
 				padding: 10px;
-				border: solid 1px rgb(158, 149, 149);
+				color: rgb(22, 22, 22);
 				margin: 5px;
 				box-sizing: border-box;
 			}
 
-			p,
-			pre {
-				margin: 5px 0;
+			p {
+				margin: 1em 0;
 			}
 
+			pre,
 			code {
 				margin: 0;
+				padding: 0;
+			}
+
+			label {
+				display: block;
+				margin: 1em 0;
+			}
+
+			.rd-helperText {
+				font-size: 0.8em;
+				color: rgb(66, 66, 66)
 			}
 		</style>
 	</head>
 	<body>
 		<p>
-			This will have options for font-size, text width and such. Now it is just a filler though to tell you that it is in the works ;)
+			<label>
+				<strong>Font family</strong></br>
+				<span class="rd-helperText">You can use any font here that is available on your computer.</span></br>
+				<input type="text" id="rd-fontFamily">  
+			</label>
+			<label>
+				<strong>Font size</strong></br>
+				<span class="rd-helperText">This is the base font size that affects all other font sizes.</span></br>
+				<input type="text" id="rd-fontSize"></label>
+			<label>
+				<strong>Text width</strong></br>
+				<span class="rd-helperText">By default 45em is used as that results in roughly the line width that studies have found to be most pleasant to read.</span></br>
+				<input type="text" id="rd-textWidth">
+			</label> 
+			<input type="button" value="save" id="rd-save"></br>
+
 		</p>
 		<p>
 			<strong>About</strong></br>
@@ -56,5 +88,9 @@ limitations under the License.
 			</ul>
 
 		</p>
-    </body>
+		<script src="../libs/jquery-3.3.1.min.js"></script>
+		<script src="../globals.js"></script>
+		<script src="options.js"></script>
+	</body>
+
 </html>

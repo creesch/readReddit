@@ -6,7 +6,9 @@
     },
     "globals": {
         "chrome": true,
-        "DOMPurify": true
+        "DOMPurify": true,
+        "defaultSettings": true,
+        "feedbackWindow": true
     },
     "extends": "eslint:recommended",
     "rules": {

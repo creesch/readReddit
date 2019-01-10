@@ -16,7 +16,8 @@
     },
     "permissions": [
         "https://*.reddit.com/",
-        "storage"
+        "storage",
+        "tabs"
     ],
     "icons": {
         "16": "data/images/icon16.png",
@@ -37,6 +38,7 @@
             "js": [
                 "data/libs/jquery-3.3.1.min.js",
                 "data/libs/purify.js",
+                "data/globals.js",
                 "data/main.js"
             ]
         }

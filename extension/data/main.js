@@ -1,6 +1,7 @@
 (function() {
     const $body = $('body');
     const mdRegex = /<div class="md">([\s\S]*?)<\/div>/m;
+    const currentSettings = {};
     let locationPathname;
 
     function handleComments(commentArray, authorName) {
@@ -30,7 +31,7 @@
 
     // Show the overlay with readable text.
     function activateOverlay() {
-        const colorMode = window.localStorage.getItem('colorMode') || 'light';
+        const colorMode = currentSettings.colorMode;
 
         $body.addClass('rd-overlayActive');
         // Create the api request URL. Done like this so it will also work on reddit redesign.
@@ -64,14 +65,17 @@
 
             $body.append($overlay);
 
+            // Changing color mode. Needs to be redone if more themes are added as this does not scale at all.
             $overlay.on('click', '#rd-colorMode', function() {
                 const $this = $(this);
                 if($this.attr('data-mode') === 'light') {
-                    window.localStorage.setItem('colorMode', 'dark');
+                    chrome.storage.local.set('colorMode', 'dark');
+                    currentSettings.colorScheme = 'dark';
                     $body.addClass('rd-dark');
                     $this.attr('data-mode', 'dark');
                 } else {
-                    window.localStorage.setItem('colorMode', 'light');
+                    chrome.storage.local.set('colorMode', 'light');
+                    currentSettings.colorScheme = 'light';
                     $body.removeClass('rd-dark');
                     $this.attr('data-mode', 'light');
                 }
@@ -85,23 +89,37 @@
     }
 
     function addIcon() {
+        chrome.storage.local.get(['fontFamily', 'fontSize', 'textWidth', 'colorScheme'], function(result) {
 
-        // Ugly way to inject css to insure cross browser compatibility
-        // The alternative is having to maintain seperate css or a buildstreet just for a few lines of css.
-        $('head').append(`
-            <style>
-                #rd-colorMode {
-                    background-image: url('${chrome.runtime.getURL('data/images/moon25.png')}')
-                }
-                .rd-dark #rd-colorMode {
-                    background-image: url('${chrome.runtime.getURL('data/images/sun25.png')}')
-                }
-            </style>
-        `);
+            currentSettings.fontFamily = result.fontFamily || defaultSettings.fontFamily;
+            currentSettings.fontSize = result.fontSize || defaultSettings.fontSize;
+            currentSettings.textWidth = result.textWidth || defaultSettings.textWidth;
+            currentSettings.colorScheme = result.colorScheme || defaultSettings.colorScheme;
 
-        const $readIcon = $(`<div id="rd-readIcon"><img src="${chrome.runtime.getURL('data/images/icon48.png')}"></div>`).appendTo($body);
+            // Insert css that depends on variables.
+            $('head').append(`
+                <style>
+                    #rd-textOverlay {
+                        font-family: ${currentSettings.fontFamily};
+                        font-size: ${currentSettings.fontSize};
+                    }
 
-        $readIcon.on('click', activateOverlay);
+                    #rd-mainTextContent {
+                        max-width: ${currentSettings.textWidth};
+                    }
+                    #rd-colorMode {
+                        background-image: url('${chrome.runtime.getURL('data/images/moon25.png')}')
+                    }
+                    .rd-dark #rd-colorMode {
+                        background-image: url('${chrome.runtime.getURL('data/images/sun25.png')}')
+                    }
+                </style>
+            `);
+
+            const $readIcon = $(`<div id="rd-readIcon"><img src="${chrome.runtime.getURL('data/images/icon48.png')}"></div>`).appendTo($body);
+
+            $readIcon.on('click', activateOverlay);
+        });
     }
 
     function removeIcon() {

@@ -8,8 +8,6 @@
     right: 0;
     z-index: 2147483647;
     overflow-y: scroll;
-    font-family: verdana;
-    font-size: 16px;
 }
 
 /* Activation icon */
@@ -77,7 +75,6 @@ body.rd-overlayActive {
 }
 
 #rd-mainTextContent {
-    max-width: 45em;
     margin: auto;
 }
 
