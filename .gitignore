@@ -1,0 +1,9 @@
+*.bak
+/.idea
+/.settings
+/.vscode
+*.zip
+*.xpi
+*.nex
+/node_modules
+/build

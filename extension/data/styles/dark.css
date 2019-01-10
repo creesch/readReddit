@@ -1,0 +1,67 @@
+
+.rd-dark #rd-closeOverlay {
+    background-color: #3b3b3b;
+}
+
+.rd-dark #rd-textOverlay {
+    background-color: #1D1D1D;
+    color: #ececec;
+}
+
+.rd-dark #rd-textOverlay h1,
+.rd-dark #rd-textOverlay h2,
+.rd-dark #rd-textOverlay h3,
+.rd-dark #rd-textOverlay h4 {
+    color: #ececec;
+}
+
+.rd-dark #rd-textOverlay a {
+    color: #0079d3;
+}
+
+.rd-dark #rd-textOverlay a:hover {
+    color: #0079d3;
+}
+
+.rd-dark #rd-textOverlay a:visited {
+    color: #31669b;
+}
+
+/*  quotes */
+.rd-dark #rd-textOverlay blockquote {
+	background-color: #2C2C2C;
+	border-color: #2C2C2C;
+	color: #cbcbcb;
+}
+
+/* inline code */ 
+.rd-dark #rd-textOverlay code {
+    background-color: rgba(255, 255, 255, 0.09);
+}
+
+/* code block */
+
+.rd-dark #rd-textOverlay pre {
+    background-color: #2C2C2C;
+}
+
+.rd-dark #rd-textOverlay pre code {
+    background: none;
+}
+
+
+/* tables */
+.rd-dark #rd-textOverlay table {
+    border: solid 1px #DDEEEE;
+}
+
+.rd-dark #rd-textOverlay table thead th {
+    background-color: #303030;
+    border: solid 1px #4d4d4d;
+    color: #cbcbcb;
+}
+
+.rd-dark #rd-textOverlay table tbody td {
+    border: solid 1px #4d4d4d;
+    color: #cbcbcb;
+}

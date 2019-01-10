@@ -1,0 +1,220 @@
+body.rd-overlayActive {
+    overflow: hidden;
+}
+
+#rd-readIcon {
+    position: fixed;
+    bottom: 50px;
+    right: 30px;
+    cursor: pointer;
+    z-index: 2147483647;
+    background-color: #dededeb9;
+    width: 35px;
+    height: 35px;
+    border-radius: 30px;
+}
+
+#rd-readIcon:hover {
+    background-color: #dedede
+}
+
+#rd-readIcon img {
+    width: 20px;
+    margin: 8px;
+}
+
+body.rd-overlayActive #rd-readIcon {
+    display: none;
+}
+
+#rd-closeOverlay {
+    position: fixed;
+    right: 20px;
+    top: 5px;
+    background-color: #ccc;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 25px;
+    padding: 0;
+    opacity: 0.5;
+}
+
+#rd-closeOverlay:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+#rd-textOverlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    color: #1D1D1D;
+    z-index: 2147483647;
+    overflow-y: scroll;
+    font-family: verdana;
+    font-size: 16px;
+}
+
+#rd-mainTextContent {
+    max-width: 45em;
+    margin: auto;
+}
+
+
+#rd-textOptions {
+    position: fixed;
+    opacity: 0.3;
+  }
+
+  #rd-textOptions:hover {
+    opacity: 1;
+  }
+
+  #rd-textOptions img {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  #rd-colorMode {
+    vertical-align: sub;
+  }
+  #rd-textOptions {
+    left: 5px;
+    top: 5px;
+  }
+
+
+/* Set up all the text styling */
+#rd-textOverlay p,
+#rd-textOverlay th,
+#rd-textOverlay td {
+    line-height: 1.4em;
+}
+
+#rd-textOverlay p {
+    margin: 0.8em 0;
+}
+
+
+#rd-textOverlay ul,
+#rd-textOverlay ol {
+    padding-left: 2em;
+    margin: 0.5em 0;
+}
+
+#rd-textOverlay ul {
+    list-style-type: disc;
+}
+
+#rd-textOverlay ol {
+    list-style-type: decimal;
+}
+
+#rd-textOverlay li {
+    line-height: 1.4em;
+}
+
+#rd-textOverlay h1,
+#rd-textOverlay h2,
+#rd-textOverlay h3,
+#rd-textOverlay h4 {
+    font-weight: bold;
+    color: #1D1D1D;
+    margin: 10px 0 5px 0;
+}
+
+#rd-textOverlay h1 {
+    font-size: 2em;
+}
+
+#rd-textOverlay h2 {
+    font-size: 1.4em;
+}
+
+#rd-textOverlay h3 {
+    font-size: 1.2em;
+}
+
+#rd-textOverlay h4 {
+    font-size: 1.1em;
+}
+
+#rd-textOverlay a {
+    color: #0079d3;
+    text-decoration: none;
+}
+
+#rd-textOverlay a:hover {
+    color: #0079d3;
+    text-decoration: underline;
+}
+
+#rd-textOverlay a:visited {
+    color: #31669b;
+    text-decoration: none;
+}
+
+#rd-textOverlay em {
+    font-style: italic;
+}
+
+#rd-textOverlay strong {
+    font-style: normal;
+    font-weight: bold;
+}
+
+/*  quotes */
+#rd-textOverlay blockquote {
+	display: block;
+	background-color: #EEE;
+	border-color: #D6D5CF;
+	margin: 5px 5px;
+	padding: 5px;
+	color: #6F6F6F;
+	position: relative;
+}
+
+/* inline code */
+#rd-textOverlay code {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+/* code block */
+
+#rd-textOverlay pre {
+    background-color: #F5F5F5;
+    border: 0;
+    padding: 1em;
+    overflow: auto;
+    font-family: "Courier New",courier,monospace;
+}
+
+#rd-textOverlay pre code {
+    background: none;
+}
+
+/* tables */
+#rd-textOverlay table {
+    border: solid 1px #DDEEEE;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 10px 0;
+}
+
+#rd-textOverlay table thead th {
+    background-color: #D8D8D8;
+    border: solid 1px #b3b3b3;
+    padding: 0.5em;
+    font-weight: bold;
+}
+
+#rd-textOverlay table tbody td {
+    border: solid 1px #b3b3b3;
+    color: #333;
+    padding: 0.5em;
+}

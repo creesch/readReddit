@@ -1,0 +1,10 @@
+# Build output
+build/*
+
+# External libraries
+/extension/data/libs/*
+
+# IDE related
+.idea/*
+.settings/*
+.vscode/*

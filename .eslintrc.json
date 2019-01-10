@@ -1,0 +1,56 @@
+{
+    "env": {
+        "browser": true,
+        "jquery": true,
+        "es6": true
+    },
+    "globals": {
+        "chrome": true,
+        "DOMPurify": true
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+        "no-console": 0,
+        "eqeqeq": "warn",
+        "no-multi-spaces": "error",
+        "no-inner-declarations": "warn",
+        "prefer-template": "warn",
+        "no-useless-escape": "warn",
+        "no-var": "warn",
+        "prefer-const": "warn",
+        "no-constant-condition": "warn",
+        "no-trailing-spaces": "error",
+        "space-before-blocks": "error",
+        "space-infix-ops": "error",
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max" : 1
+            }
+        ],
+        "template-curly-spacing": [
+            "error",
+            "never"
+        ],
+        "indent": [
+            "warn",
+            4
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single",
+            {
+                "avoidEscape": true,
+                "allowTemplateLiterals": true
+            }
+        ],
+        "semi": [
+            "error",
+            "always"
+        ]
+    }
+}
