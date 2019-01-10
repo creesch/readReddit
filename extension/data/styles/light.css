@@ -15,6 +15,10 @@
     color: #1D1D1D;
 }
 
+#rd-textOverlay p.rd-readingTime {
+    color: #9f9f9f;
+}
+
 #rd-textOverlay h1,
 #rd-textOverlay h2,
 #rd-textOverlay h3,

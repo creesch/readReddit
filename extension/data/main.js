@@ -58,6 +58,7 @@
                     <h1 id="rd-title">
                         ${DOMPurify.sanitize(data[0].data.children[0].data.title)}
                     </h1>
+                    <p class="rd-readingTime"><span class="rd-eta"></span> (<span class="rd-words"></span> words)</p>
                     ${selfTextHTML}
 
                     ${continuedInComments}
@@ -66,6 +67,11 @@
             `);
 
             $body.append($overlay);
+
+            $overlay.find('#rd-mainTextContent').readingTime({
+                readingTimeTarget: '.rd-eta',
+                wordCountTarget: '.rd-words'
+            });
 
             // Changing color mode. Needs to be redone if more themes are added as this does not scale at all.
             $overlay.on('click', '#rd-colorMode', function() {

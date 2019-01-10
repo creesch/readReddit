@@ -1,5 +1,5 @@
 
-/* Main text overlay base font type and size is set here.*/ 
+/* Main text overlay base font type and size is set here.*/
 #rd-textOverlay {
     position: fixed;
     top: 0;
@@ -78,6 +78,10 @@ body.rd-overlayActive {
     margin: auto;
 }
 
+#rd-textOverlay p.rd-readingTime {
+    font-size: 0.8em;
+    font-weight: bold;
+}
 /* Set up all the text styling in such a way that there is (hopefully) minimal disruption from subreddit styles */
 #rd-textOverlay p,
 #rd-textOverlay th,
