@@ -32,8 +32,6 @@
     function activateOverlay() {
         const colorMode = window.localStorage.getItem('colorMode') || 'light';
 
-
-
         $body.addClass('rd-overlayActive');
         // Create the api request URL. Done like this so it will also work on reddit redesign.
         const jsonUrl = `https://old.reddit.com${location.pathname}.json`;
@@ -50,9 +48,8 @@
                 ✕
                 </div>
                 <div id="rd-textOptions">
-                    <input type="checkbox" id="rd-colorMode">
-                    <img id="rd-iconSun" src="${chrome.runtime.getURL('data/images/sun25.png')}">
-                    <img id="rd-iconMoon" src="${chrome.runtime.getURL('data/images/moon25.png')}">
+                    <div id="rd-colorMode" data-mode="${colorMode}">
+                    </div>
                 </div>
                 <div id="rd-mainTextContent">
                     <h1 id="rd-title">
@@ -65,28 +62,18 @@
             </div>
             `);
 
-            if(colorMode === 'dark') {
-                $body.addClass('rd-dark');
-                $overlay.find('#rd-iconMoon').hide();
-                $overlay.find('#rd-colorMode').prop('checked', true);
-            } else {
-                $overlay.find('#rd-iconSun').hide();
-            }
-
             $body.append($overlay);
 
-            $overlay.on('change', '#rd-colorMode', function() {
+            $overlay.on('click', '#rd-colorMode', function() {
                 const $this = $(this);
-                if($this.prop('checked')) {
+                if($this.attr('data-mode') === 'light') {
                     window.localStorage.setItem('colorMode', 'dark');
                     $body.addClass('rd-dark');
-                    $overlay.find('#rd-iconSun').show();
-                    $overlay.find('#rd-iconMoon').hide();
+                    $this.attr('data-mode', 'dark');
                 } else {
                     window.localStorage.setItem('colorMode', 'light');
                     $body.removeClass('rd-dark');
-                    $overlay.find('#rd-iconSun').hide();
-                    $overlay.find('#rd-iconMoon').show();
+                    $this.attr('data-mode', 'light');
                 }
             });
 
@@ -98,7 +85,20 @@
     }
 
     function addIcon() {
-        const $body = $('body');
+
+        // Ugly way to inject css to insure cross browser compatibility
+        // The alternative is having to maintain seperate css or a buildstreet just for a few lines of css.
+        $('head').append(`
+            <style>
+                #rd-colorMode {
+                    background-image: url('${chrome.runtime.getURL('data/images/moon25.png')}')
+                }
+                .rd-dark #rd-colorMode {
+                    background-image: url('${chrome.runtime.getURL('data/images/sun25.png')}')
+                }
+            </style>
+        `);
+
         const $readIcon = $(`<div id="rd-readIcon"><img src="${chrome.runtime.getURL('data/images/icon48.png')}"></div>`).appendTo($body);
 
         $readIcon.on('click', activateOverlay);

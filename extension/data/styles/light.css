@@ -1,0 +1,71 @@
+#rd-readIcon {
+    background-color: #dededeb9;
+}
+
+#rd-readIcon:hover {
+    background-color: #dedede
+}
+
+#rd-closeOverlay {
+    background-color: #ccc;
+}
+
+#rd-textOverlay {
+    background-color: #fff;
+    color: #1D1D1D;
+}
+
+#rd-textOverlay h1,
+#rd-textOverlay h2,
+#rd-textOverlay h3,
+#rd-textOverlay h4 {
+    color: #1D1D1D;
+}
+
+#rd-textOverlay a {
+    color: #0079d3;
+}
+
+#rd-textOverlay a:hover {
+    color: #0079d3;
+}
+
+#rd-textOverlay a:visited {
+    color: #31669b;
+}
+
+/* Quotes */
+#rd-textOverlay blockquote {
+	background-color: #EEE;
+	border-color: #D6D5CF;
+	color: #6F6F6F;
+}
+
+/* Inline code */
+#rd-textOverlay code {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+/* Code block */
+#rd-textOverlay pre {
+    background-color: #F5F5F5;
+}
+
+.rd-dark #rd-textOverlay pre code {
+    background: none;
+}
+
+/* tables */
+#rd-textOverlay table {
+    border: solid 1px #DDEEEE;
+}
+
+#rd-textOverlay table thead th {
+    background-color: #D8D8D8;
+    border: solid 1px #b3b3b3;
+}
+
+#rd-textOverlay table tbody td {
+    border: solid 1px #b3b3b3;
+    color: #333;
+}

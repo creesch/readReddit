@@ -1,3 +1,10 @@
+.rd-dark #rd-readIcon {
+    background-color: #dededeb9;
+}
+
+.rd-dark #rd-readIcon:hover {
+    background-color: #dedede
+}
 
 .rd-dark #rd-closeOverlay {
     background-color: #3b3b3b;
@@ -34,13 +41,12 @@
 	color: #cbcbcb;
 }
 
-/* inline code */ 
+/* Inline code */
 .rd-dark #rd-textOverlay code {
     background-color: rgba(255, 255, 255, 0.09);
 }
 
-/* code block */
-
+/* Code block */
 .rd-dark #rd-textOverlay pre {
     background-color: #2C2C2C;
 }
@@ -48,7 +54,6 @@
 .rd-dark #rd-textOverlay pre code {
     background: none;
 }
-
 
 /* tables */
 .rd-dark #rd-textOverlay table {
