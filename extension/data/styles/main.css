@@ -133,6 +133,8 @@ body.rd-overlayActive {
 }
 
 #rd-textOverlay a {
+    font-weight: inherit;
+    font-style: inherit;
     text-decoration: none;
 }
 
@@ -149,7 +151,7 @@ body.rd-overlayActive {
 }
 
 #rd-textOverlay strong {
-    font-style: normal;
+    font-style: inherit;
     font-weight: bold;
 }
 
