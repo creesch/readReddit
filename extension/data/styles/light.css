@@ -1,9 +1,20 @@
+#rd-buttonPost,
+#rd-buttonComments,
 #rd-readIcon {
     background-color: #dededeb9;
+    color: #1D1D1D;
 }
 
+#rd-buttonPost:hover,
+#rd-buttonComments:hover,
 #rd-readIcon:hover {
     background-color: #dedede
+}
+
+#rd-buttonPost:hover,
+#rd-buttonComments:hover
+{
+  color: #3b3b3b;
 }
 
 #rd-closeOverlay {

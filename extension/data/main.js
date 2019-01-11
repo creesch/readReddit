@@ -61,9 +61,21 @@
                 </style>
             `);
 
-            const $readIcon = $(`<div id="rd-readIcon"><img src="${chrome.runtime.getURL('data/images/icon48.png')}"></div>`).appendTo($body);
+            const $readIcon = $(`
+                <div id="rd-readButton">
+                    <div id="rd-buttonPost">
+                    Text post
+                    </div>
+                <div id="rd-readIcon">
+                    <img src="${chrome.runtime.getURL('data/images/icon48.png')}">
+                </div>
+                    <div id="rd-buttonComments">
+                    Comments
+                    </div>
+                </div>
+            `).appendTo($body);
 
-            $readIcon.on('click', activateSelfPostOverlay);
+            $readIcon.on('click', '#rd-buttonPost', activateSelfPostOverlay);
         });
     }
 

@@ -50,15 +50,14 @@
         }
         requestAnimationFrame(() => {
             $body.append($overlay);
+            $overlay.find('#rd-mainTextContent').readingTime({
+                readingTimeTarget: '.rd-eta',
+                wordCountTarget: '.rd-words'
+            });
         });
 
         $body.removeClass('rd-overlayLoading');
         $body.addClass('rd-overlayActive');
-
-        $overlay.find('#rd-mainTextContent').readingTime({
-            readingTimeTarget: '.rd-eta',
-            wordCountTarget: '.rd-words'
-        });
 
         // Return the overlay in case we want to do more with it after creation.
         return $overlay;

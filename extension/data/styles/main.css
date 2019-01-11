@@ -10,21 +10,70 @@
     overflow-y: scroll;
 }
 
-/* Activation icon */
-#rd-readIcon {
+/* Activation menu */
+#rd-readButton {
     position: fixed;
     bottom: 50px;
     right: 30px;
-    cursor: pointer;
+}
+
+#rd-buttonPost,
+#rd-buttonComments {
+  backface-visibility: hidden;
+  visibility: hidden;
+  font-family: Verdana,Geneva,sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  opacity: 0;
+  width: 0px;
+  overflow: hidden;
+  height: 12px;
+  padding: 10px;
+  cursor: pointer;
+  transition-property:opacity width;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+}
+
+#rd-readButton:hover #rd-buttonPost,
+#rd-readButton:hover #rd-buttonComments
+{
+  width: 75px;  
+  visibility: visible;
+  opacity: 1;
+}
+
+#rd-readButton:hover #rd-readIcon {
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    transition-property: border-radius;
+    transition-duration: 300ms;
+    transition-timing-function: linear;
+}
+
+#rd-readIcon {
+    display: block;
     z-index: 2147483647;
     width: 35px;
     height: 35px;
-    border-radius: 30px;
+    border-radius: 25px;
+    margin-left: auto;
+    margin-right: 0;
 }
 
 #rd-readIcon img {
     width: 20px;
     margin: 8px;
+}
+
+
+#rd-readIcon:hover {
+    background-color: #dedede
+}
+
+body.rd-overlayLoading #rd-readButton #rd-buttonPost,
+body.rd-overlayLoading #rd-readButton #rd-buttonComments {
+    visibility: hidden;
 }
 
 body.rd-overlayLoading #rd-readIcon {
@@ -43,7 +92,7 @@ body.rd-overlayLoading #rd-readIcon {
     }
 }
 
-body.rd-overlayActive #rd-readIcon {
+body.rd-overlayActive #rd-readButton {
     display: none;
 }
 
