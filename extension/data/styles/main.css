@@ -38,7 +38,7 @@
 #rd-readButton:hover #rd-buttonPost,
 #rd-readButton:hover #rd-buttonComments
 {
-  width: 75px;  
+  width: 75px;
   visibility: visible;
   opacity: 1;
 }
@@ -147,6 +147,10 @@ body.rd-overlayActive {
     font-size: 0.8em;
     font-weight: bold;
 }
+
+.rd-comment {
+    margin-bottom: 300px;
+  }
 /* Set up all the text styling in such a way that there is (hopefully) minimal disruption from subreddit styles */
 #rd-textOverlay p,
 #rd-textOverlay th,

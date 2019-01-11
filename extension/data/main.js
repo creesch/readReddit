@@ -27,7 +27,7 @@
                         <span class="rd-eta"></span> (<span class="rd-words"></span> words)
                     </p>
                     ${selfTextHTML}
-                    
+
                     ${continuedInComments}
                     `;
 
@@ -49,7 +49,7 @@
                     const $content = $overlay.find('#rd-mainTextContent');
                     result.forEach((comment, index) => {
                         const $storyHTML = $(`
-                            <div id="rd-comment-${index}">
+                            <div id="rd-comment-${index}" class="rd-comment">
                                 <h2>Comment by ${comment.author}</h2>
                                 <p class="rd-readingTime">
                                     <span class="rd-eta"></span> (<span class="rd-words"></span> words)
