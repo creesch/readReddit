@@ -8,7 +8,9 @@
         "chrome": true,
         "DOMPurify": true,
         "defaultSettings": true,
-        "feedbackWindow": true
+        "feedbackWindow": true,
+        "UI": true,
+        "utils": true
     },
     "extends": "eslint:recommended",
     "rules": {
