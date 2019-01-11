@@ -38,6 +38,7 @@
                 "https://*.reddit.com/*"
             ],
             "css": [
+                "data/styles/global.css",
                 "data/styles/main.css",
                 "data/styles/light.css",
                 "data/styles/dark.css"
