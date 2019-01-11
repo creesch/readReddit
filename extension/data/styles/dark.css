@@ -7,7 +7,7 @@
 
 .rd-dark #rd-buttonPost:hover,
 .rd-dark #rd-buttonComments:hover,
-.rd-dark #rd-readIcon:hover {
+#rd-readButton:hover #rd-readIcon {
     background-color: #dedede
 }
 

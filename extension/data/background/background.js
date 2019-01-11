@@ -31,4 +31,29 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         sendResponse({comments: commentChainDigger(commentArray, authorName)});
         return true;
     }
+
+    if(request.action === 'commentSection') {
+        const commentArray = request.details.commentArray;
+        commentArray.sort(function(a, b) {
+            return a.data.created_utc - b.data.created_utc;
+        });
+        const returnArray = [];
+
+        commentArray.forEach((comment) => {
+            const commentAuthor = comment.data.author;
+            if(commentAuthor !== '[deleted]') {
+                let returnText = DOMPurify.sanitize(comment.data.body_html.match(mdRegex)[1]);
+                if(comment.data.replies) {
+                    returnText = `${returnText}${commentChainDigger(comment.data.replies.data.children, commentAuthor)}`;
+                }
+
+                returnArray.push({
+                    author: commentAuthor,
+                    text: returnText
+                });
+            }
+        });
+        sendResponse({comments: returnArray});
+        return true;
+    }
 });

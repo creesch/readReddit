@@ -23,4 +23,15 @@
 
         });
     };
+
+    utils.commentSection = function(commentArray, callback) {
+        chrome.runtime.sendMessage({
+            action: 'commentSection',
+            details: {
+                commentArray: commentArray
+            }
+        }, function(response) {
+            return callback(response.comments);
+        });
+    };
 }(utils = window.utils || {}));

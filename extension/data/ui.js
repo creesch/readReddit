@@ -15,7 +15,7 @@
     //--------
     // Overlay
     //--------
-    UI.overlay = function(title, content, textOptions) {
+    UI.overlay = function(title, content, readTimeElement, textOptions) {
         const colorMode = utils.currentSettings.colorMode;
         if(colorMode === 'dark') {
             $body.addClass('rd-dark');
@@ -50,10 +50,13 @@
         }
         requestAnimationFrame(() => {
             $body.append($overlay);
-            $overlay.find('#rd-mainTextContent').readingTime({
-                readingTimeTarget: '.rd-eta',
-                wordCountTarget: '.rd-words'
-            });
+
+            if(readTimeElement) {
+                $overlay.find(readTimeElement).readingTime({
+                    readingTimeTarget: '.rd-eta',
+                    wordCountTarget: '.rd-words'
+                });
+            }
         });
 
         $body.removeClass('rd-overlayLoading');
