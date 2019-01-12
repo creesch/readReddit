@@ -7,7 +7,7 @@ function commentChainDigger(commentArray, authorName) {
     });
 
     commentArray.forEach((comment) => {
-        if(comment.data.author === authorName) {
+        if(comment.kind === 't1' && !comment.data.banned_by && !comment.data.stickied && !comment.data.distinguished && comment.data.author === authorName) {
             const selfTextHTML = `
             <span class="rd-commentText">
                 ${DOMPurify.sanitize(comment.data.body_html.match(mdRegex)[1])}
@@ -29,7 +29,8 @@ function commentSection(commentArray) {
 
     commentArray.forEach((comment) => {
         const commentAuthor = comment.data.author;
-        if(commentAuthor !== '[deleted]' && !comment.data.banned_by && !comment.data.stickied && !comment.data.distinguished) {
+        if(comment.kind === 't1' && commentAuthor !== '[deleted]' && !comment.data.banned_by && !comment.data.stickied && !comment.data.distinguished) {
+            console.log(comment)
             let returnText = DOMPurify.sanitize(comment.data.body_html.match(mdRegex)[1]);
             if(comment.data.replies) {
                 returnText = `${returnText}${commentChainDigger(comment.data.replies.data.children, commentAuthor)}`;
