@@ -198,7 +198,7 @@
             }
         }
         // This is done so that this also works properly on reddit redesign.
-        if(!$('#siteTable').length) {
+        if(!$('#header').length) {
             if(firstInit) {
                 console.log('first init');
                 redesignListener.start();

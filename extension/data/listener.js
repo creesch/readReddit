@@ -235,7 +235,7 @@
 
     }
 
-    if(!$('#siteTable').length) {
+    if(!$('#header').length) {
         window.redesignListener = new redesignListener();
     }
 })();
