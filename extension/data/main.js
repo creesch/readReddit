@@ -98,7 +98,7 @@
                     }
 
                     #rd-mainTextContent {
-                        max-width: ${utils.currentSettings.textWidth};
+                        width: ${utils.currentSettings.textWidth};
                     }
                 </style>
             `);

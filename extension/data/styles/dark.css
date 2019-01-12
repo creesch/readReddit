@@ -17,13 +17,10 @@
   color: #3b3b3b;
 }
 
-.rd-dark #rd-closeOverlay {
-    background-color: #3b3b3b;
-}
-
 .rd-dark .rd-moon,
 .rd-dark .rd-sun,
-.rd-dark #rd-settings {
+.rd-dark #rd-settings,
+.rd-dark .rd-close {
     fill: #949494;
 }
 
