@@ -13,6 +13,7 @@
 /* Activation menu */
 #rd-readButton {
     position: fixed;
+    z-index: 2147483647;
     bottom: 50px;
     right: 30px;
 }
