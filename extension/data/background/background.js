@@ -1,5 +1,5 @@
 const mdRegex = /<div class="md">([\s\S]*?)<\/div>/m;
-function commentChainDigger(commentArray, authorName) {
+function commentChainDigger(commentArray, authorName, modOverride) {
     let comments = '';
     // Probably not needed at all, but let's make extra sure things are in posting order.
     commentArray.sort(function(a, b) {
@@ -7,40 +7,50 @@ function commentChainDigger(commentArray, authorName) {
     });
 
     commentArray.forEach((comment) => {
-        if(comment.kind === 't1' && !comment.data.banned_by && !comment.data.stickied && !comment.data.distinguished && comment.data.author === authorName) {
-            const selfTextHTML = `
-            <span class="rd-commentText">
-                ${DOMPurify.sanitize(comment.data.body_html.match(mdRegex)[1])}
-            </span>
-            `;
-            comments = `${comments}${selfTextHTML}`;
-
-            if(comment.data.replies) {
-                comments = `${comments}${commentChainDigger(comment.data.replies.data.children, authorName)}`;
-            }
+        if(comment.kind !== 't1' && comment.data.banned_by || comment.data.author !== authorName) {
+            return;
         }
+
+        if((comment.data.stickied || comment.data.distinguished) && !modOverride) {
+            return;
+        }
+        const selfTextHTML = `
+        <span class="rd-commentText">
+            ${DOMPurify.sanitize(comment.data.body_html.match(mdRegex)[1])}
+        </span>
+        `;
+        comments = `${comments}${selfTextHTML}`;
+
+        if(comment.data.replies) {
+            comments = `${comments}${commentChainDigger(comment.data.replies.data.children, authorName)}`;
+        }
+
     });
 
     return comments;
 }
 
-function commentSection(commentArray) {
+function commentSection(commentArray, modOverride) {
     const returnArray = [];
 
     commentArray.forEach((comment) => {
         const commentAuthor = comment.data.author;
-        if(comment.kind === 't1' && commentAuthor !== '[deleted]' && !comment.data.banned_by && !comment.data.stickied && !comment.data.distinguished) {
-            console.log(comment)
-            let returnText = DOMPurify.sanitize(comment.data.body_html.match(mdRegex)[1]);
-            if(comment.data.replies) {
-                returnText = `${returnText}${commentChainDigger(comment.data.replies.data.children, commentAuthor)}`;
-            }
-
-            returnArray.push({
-                author: commentAuthor,
-                text: returnText
-            });
+        if(comment.kind !== 't1' || commentAuthor === '[deleted]' || comment.data.banned_by) {
+            return;
         }
+        if((comment.data.stickied || comment.data.distinguished) && !modOverride) {
+            return;
+        }
+
+        let returnText = DOMPurify.sanitize(comment.data.body_html.match(mdRegex)[1]);
+        if(comment.data.replies) {
+            returnText = `${returnText}${commentChainDigger(comment.data.replies.data.children, commentAuthor, modOverride)}`;
+        }
+
+        returnArray.push({
+            author: commentAuthor,
+            text: returnText
+        });
     });
 
     return returnArray;
@@ -56,7 +66,8 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 
     if(request.action === 'commentSection') {
         const commentArray = request.details.commentArray;
-        const returnArray = commentSection(commentArray);
+        const modOverride = request.details.modOverride;
+        const returnArray = commentSection(commentArray, modOverride);
 
         sendResponse({comments: returnArray});
         return true;

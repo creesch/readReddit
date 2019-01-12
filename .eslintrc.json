@@ -10,7 +10,8 @@
         "defaultSettings": true,
         "feedbackWindow": true,
         "UI": true,
-        "utils": true
+        "utils": true,
+        "redesignListener": true
     },
     "extends": "eslint:recommended",
     "rules": {

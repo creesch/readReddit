@@ -11,6 +11,17 @@
 }
 
 /* Activation menu */
+a.rd-commentReadRedesign {
+    font-size: 12px;
+    font-weight: bold;
+    color: rgb(135, 138, 140);
+}
+
+
+a.rd-commentReadRedesign:hover {
+    text-decoration: underline;
+}
+
 #rd-readButton {
     position: fixed;
     z-index: 2147483647;
@@ -275,7 +286,8 @@ body.rd-overlayActive {
     font-family: "Courier New",courier,monospace;
 }
 
-#rd-textOverlay pre code {
+.rd-dark #rd-textOverlay pre code,
+.rd-light #rd-textOverlay pre code {
     background: none;
 }
 

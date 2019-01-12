@@ -1,16 +1,22 @@
 (function() {
     const $body = $('body');
     let locationPathname;
+    let firstInit = true;
 
     // Show the overlay with readable text.
-    function activateSelfPostOverlay(type) {
+    function activateSelfPostOverlay(options) {
         $body.addClass('rd-overlayLoading');
         // Create the api request URL. Done like this so it will also work on reddit redesign.
-        const jsonUrl = `https://old.reddit.com${location.pathname}.json`;
+        let jsonUrl;
+        if(!options.permalink) {
+            jsonUrl = `https://old.reddit.com${location.pathname}.json`;
+        } else {
+            jsonUrl = `${options.permalink}.json`;
+        }
 
         $.getJSON(jsonUrl, {raw_json : 1}).done((data) => {
             // Handle self post
-            if(type === 'post') {
+            if(options.type === 'post') {
                 if(!data[0].data.children[0].data.is_self || !data[0].data.children[0].data.selftext_html) {
                     UI.feedbackText('Not a text post or no text in post', UI.FEEDBACK_NEGATIVE, 3000, UI.DISPLAY_CURSOR);
                     $body.removeClass('rd-overlayLoading');
@@ -35,7 +41,7 @@
                 });
             }
 
-            if(type === 'comments') {
+            if(options.type === 'comments') {
                 // Handle comments
                 if(!data[1].data.children.length) {
                     UI.feedbackText('No comments to load', UI.FEEDBACK_NEGATIVE, 3000, UI.DISPLAY_CURSOR);
@@ -43,7 +49,10 @@
                     return;
                 }
 
-                utils.commentSection(data[1].data.children, (result) => {
+                utils.commentSection({
+                    commentArray: data[1].data.children,
+                    modOverride: options.modOverride
+                }, (result) => {
                     const title = DOMPurify.sanitize(data[0].data.children[0].data.title);
                     const $overlay = UI.overlay(title, `<div id="rd-commentCount">${result.length} comment${result.length > 1 ? `s` : ``}</div>`, false);
                     const $content = $overlay.find('#rd-mainTextContent');
@@ -109,12 +118,50 @@
             `).appendTo($body);
 
             $readIcon.on('click', '#rd-buttonPost', () => {
-                activateSelfPostOverlay('post');
+                activateSelfPostOverlay({type: 'post'});
             });
 
             $readIcon.on('click', '#rd-buttonComments', () => {
-                activateSelfPostOverlay('comments');
+                activateSelfPostOverlay({type: 'comments'});
             });
+        });
+    }
+
+    function readLinkComments() {
+        const $things = $('.thing:not(.rd-seen)');
+        $things.each(function() {
+            const $thing = $(this);
+            if(!$thing.hasClass('rd-seen')) {
+                $thing.addClass('rd-seen');
+                const permalink = $thing.find('a.bylink').attr('href') || $thing.find('.buttons:first .first a').attr('href');
+                const author = $thing.find('.author:first').text();
+                if(author) {
+                    $thing.find('.flat-list.buttons').eq(0).append(`
+                        <li>
+                            <a href="javascript:;" class="rd-commentRead" data-permalink="${permalink}">read</a>
+                        </li>
+                    `);
+                }
+
+            }
+        });
+    }
+
+    function readLinkCommentsRedesign() {
+        console.log('readLinkCommentsRedesign fired');
+        redesignListener.on('comment', function(e) {
+            const $target = $(e.target);
+            const commentID = e.detail.data.id.substring(3);
+            const postID = e.detail.data.post.id.substring(3);
+            const subreddit = e.detail.data.subreddit.name;
+            const permalink = `https://old.reddit.com/r/${subreddit}/comments/${postID}/-/${commentID}/`;
+
+            $target.append(`<a href="javascript:;" class="rd-commentReadRedesign" data-permalink="${permalink}">read</a>`);
+        });
+
+        $body.on('click', '.rd-commentReadRedesign', function() {
+            const permalink = $(this).attr('data-permalink');
+            activateSelfPostOverlay({type: 'comments', permalink: permalink, modOverride: true});
         });
     }
 
@@ -123,19 +170,44 @@
     }
 
     // Show the read icon when we are viewing a post.
-    function watchPushState() {
+
+    function initCheck() {
         const samePage = locationPathname === location.pathname;
         if (!samePage) {
             locationPathname = location.pathname;
 
-            if(/^\/r\/[^/]*?\/comments\/[^/]*?\//.test(locationPathname)) {
+            if(utils.pathRegex.test(locationPathname)) {
                 addIcon();
+
+                // Check if we are on old reddit and have comments that might
+                if($('.thing').length) {
+                    readLinkComments();
+                    utils.domObserver();
+                    window.addEventListener('TBNewThings', function () {
+                        readLinkComments();
+                    });
+
+                    $body.on('click', '.rd-commentRead', function() {
+                        const permalink = $(this).attr('data-permalink');
+                        activateSelfPostOverlay({type: 'comments', permalink: permalink, modOverride: true});
+                    });
+
+                }
             } else {
                 removeIcon();
             }
         }
         // This is done so that this also works properly on reddit redesign.
-        requestAnimationFrame(watchPushState);
+        if(!$('#siteTable').length) {
+            if(firstInit) {
+                console.log('first init');
+                redesignListener.start();
+                readLinkCommentsRedesign();
+                firstInit = false;
+            }
+            requestAnimationFrame(initCheck);
+        }
+
     }
-    watchPushState();
+    initCheck();
 })();
