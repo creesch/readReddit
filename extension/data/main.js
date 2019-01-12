@@ -45,7 +45,7 @@
 
                 utils.commentSection(data[1].data.children, (result) => {
                     const title = DOMPurify.sanitize(data[0].data.children[0].data.title);
-                    const $overlay = UI.overlay(title, '', false);
+                    const $overlay = UI.overlay(title, `<div id="rd-commentCount">${result.length} comment${result.length > 1 ? `s` : ``}</div>`, false);
                     const $content = $overlay.find('#rd-mainTextContent');
                     result.forEach((comment, index) => {
                         const $storyHTML = $(`
@@ -78,6 +78,8 @@
             utils.currentSettings.textWidth = result.textWidth || utils.defaultSettings.textWidth;
             utils.currentSettings.colorMode = result.colorMode || utils.defaultSettings.colorMode;
 
+            $body.addClass(`rd-${utils.currentSettings.colorMode}`);
+
             // Insert css that depends on variables.
             $('head').append(`
                 <style>
@@ -88,12 +90,6 @@
 
                     #rd-mainTextContent {
                         max-width: ${utils.currentSettings.textWidth};
-                    }
-                    #rd-colorMode {
-                        background-image: url('${chrome.runtime.getURL('data/images/moon25.png')}')
-                    }
-                    .rd-dark #rd-colorMode {
-                        background-image: url('${chrome.runtime.getURL('data/images/sun25.png')}')
                     }
                 </style>
             `);

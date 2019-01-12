@@ -76,6 +76,11 @@ body.rd-overlayLoading #rd-readButton #rd-buttonComments {
     visibility: hidden;
 }
 
+
+body.rd-overlayLoading #rd-readButton:hover #rd-readIcon {
+    border-radius: 25px;
+}
+
 body.rd-overlayLoading #rd-readIcon {
     animation-name: spin;
     animation-duration: 4000ms;
@@ -101,23 +106,42 @@ body.rd-overlayActive {
     overflow: hidden;
 }
 
-/* Color mode icon */
-#rd-colorMode {
-    height: 25px;
-    width: 25px;
-    cursor: pointer;
-}
-
 /* Area reserved for options. Possibly make into hamburger menu in the future */
 #rd-textOptions {
     position: fixed;
-    opacity: 0.3;
-    left: 5px;
-    top: 5px;
+    left: 10px;
+    top: 10px;
 }
 
-#rd-textOptions:hover {
+#rd-textOptions div {
+    cursor: pointer;
+    opacity: 0.3;
+}
+
+#rd-textOptions div:hover {
     opacity: 1;
+}
+
+/* Color mode icon */
+#rd-colorMode {
+    margin-bottom: 1em;
+}
+
+.rd-light #rd-colorMode .rd-sun {
+    display: none;
+}
+
+.rd-light #rd-colorMode .rd-moon {
+    display: inline;
+}
+
+
+.rd-dark #rd-colorMode .rd-sun {
+    display: inline;
+}
+
+.rd-dark #rd-colorMode .rd-moon {
+    display: none;
 }
 
 /* Overlay close button */
@@ -143,13 +167,18 @@ body.rd-overlayActive {
     margin: auto;
 }
 
+#rd-commentCount {
+    margin: 1em 0 4em 0;
+}
+
+#rd-commentCount,
 #rd-textOverlay p.rd-readingTime {
     font-size: 0.8em;
     font-weight: bold;
 }
 
 .rd-comment {
-    margin-bottom: 300px;
+    margin-bottom: 10em;
   }
 /* Set up all the text styling in such a way that there is (hopefully) minimal disruption from subreddit styles */
 #rd-textOverlay p,
@@ -190,7 +219,7 @@ body.rd-overlayActive {
 }
 
 #rd-textOverlay h1 {
-    font-size: 2em;
+    font-size: 1.6em;
 }
 
 #rd-textOverlay h2 {

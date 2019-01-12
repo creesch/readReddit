@@ -21,11 +21,18 @@
     background-color: #3b3b3b;
 }
 
+.rd-dark .rd-moon,
+.rd-dark .rd-sun,
+.rd-dark #rd-settings {
+    fill: #949494;
+}
+
 .rd-dark #rd-textOverlay {
     background-color: #1D1D1D;
     color: #ececec;
 }
 
+#rd-commentCount,
 .rd-dark #rd-textOverlay p.rd-readingTime {
     color: #9f9f9f;
 }

@@ -1,86 +1,93 @@
-#rd-buttonPost,
-#rd-buttonComments,
-#rd-readIcon {
+.rd-light #rd-buttonPost,
+.rd-light #rd-buttonComments,
+.rd-light #rd-readIcon {
     background-color: #dededeb9;
     color: #1D1D1D;
 }
 
-#rd-buttonPost:hover,
-#rd-buttonComments:hover,
-#rd-readButton:hover #rd-readIcon {
+.rd-light #rd-buttonPost:hover,
+.rd-light #rd-buttonComments:hover,
+.rd-light #rd-readButton:hover .rd-light #rd-readIcon {
     background-color: #dedede
 }
 
-#rd-buttonPost:hover,
-#rd-buttonComments:hover
+.rd-light #rd-buttonPost:hover,
+.rd-light #rd-buttonComments:hover
 {
   color: #3b3b3b;
 }
 
-#rd-closeOverlay {
+.rd-light #rd-closeOverlay {
     background-color: #ccc;
 }
 
-#rd-textOverlay {
+.rd-dark .rd-moon,
+.rd-dark .rd-sun,
+.rd-dark #rd-settings {
+    fill: #1D1D1D;
+}
+
+.rd-light #rd-textOverlay {
     background-color: #fff;
     color: #1D1D1D;
 }
 
-#rd-textOverlay p.rd-readingTime {
+.rd-light #rd-commentCount,
+.rd-light #rd-textOverlay p.rd-readingTime {
     color: #9f9f9f;
 }
 
-#rd-textOverlay h1,
-#rd-textOverlay h2,
-#rd-textOverlay h3,
-#rd-textOverlay h4 {
+.rd-light #rd-textOverlay h1,
+.rd-light #rd-textOverlay h2,
+.rd-light #rd-textOverlay h3,
+.rd-light #rd-textOverlay h4 {
     color: #1D1D1D;
 }
 
-#rd-textOverlay a {
+.rd-light #rd-textOverlay a {
     color: #0079d3;
 }
 
-#rd-textOverlay a:hover {
+.rd-light #rd-textOverlay a:hover {
     color: #0079d3;
 }
 
-#rd-textOverlay a:visited {
+.rd-light #rd-textOverlay a:visited {
     color: #31669b;
 }
 
 /* Quotes */
-#rd-textOverlay blockquote {
+.rd-light #rd-textOverlay blockquote {
 	background-color: #EEE;
 	border-color: #D6D5CF;
 	color: #6F6F6F;
 }
 
 /* Inline code */
-#rd-textOverlay code {
+.rd-light #rd-textOverlay code {
     background-color: rgba(0, 0, 0, 0.04);
 }
 
 /* Code block */
-#rd-textOverlay pre {
+.rd-light #rd-textOverlay pre {
     background-color: #F5F5F5;
 }
 
-.rd-dark #rd-textOverlay pre code {
+.rd-dark .rd-light #rd-textOverlay pre code {
     background: none;
 }
 
 /* tables */
-#rd-textOverlay table {
+.rd-light #rd-textOverlay table {
     border: solid 1px #DDEEEE;
 }
 
-#rd-textOverlay table thead th {
+.rd-light #rd-textOverlay table thead th {
     background-color: #D8D8D8;
     border: solid 1px #b3b3b3;
 }
 
-#rd-textOverlay table tbody td {
+.rd-light #rd-textOverlay table tbody td {
     border: solid 1px #b3b3b3;
     color: #333;
 }
