@@ -183,7 +183,7 @@
                 if($('.thing').length) {
                     readLinkComments();
                     utils.domObserver();
-                    window.addEventListener('TBNewThings', function () {
+                    window.addEventListener('rDNewThings', function () {
                         readLinkComments();
                     });
 
