@@ -3,6 +3,7 @@
 
 Readable text posts on reddit
 ========================
+readReddit adds a pleasant & clutter free reading mode for reddit text posts and comments.
 
 Reformat text posts from this:  
 ![Before](https://www.creesch.com/dump/img/img_5c37109ddbe6c.png)
