@@ -17,13 +17,10 @@
   color: #3b3b3b;
 }
 
-.rd-light #rd-closeOverlay {
-    background-color: #ccc;
-}
-
-.rd-dark .rd-moon,
-.rd-dark .rd-sun,
-.rd-dark #rd-settings {
+.rd-light .rd-moon,
+.rd-light .rd-sun,
+.rd-light #rd-settings,
+.rd-light .rd-close {
     fill: #1D1D1D;
 }
 
@@ -73,7 +70,7 @@
     background-color: #F5F5F5;
 }
 
-.rd-dark .rd-light #rd-textOverlay pre code {
+.rd-light #rd-textOverlay pre code {
     background: none;
 }
 

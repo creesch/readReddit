@@ -127,7 +127,7 @@ body.rd-overlayActive {
 
 #rd-textOptions div {
     cursor: pointer;
-    opacity: 0.3;
+    opacity: 0.5;
 }
 
 #rd-textOptions div:hover {
@@ -159,14 +159,8 @@ body.rd-overlayActive {
 /* Overlay close button */
 #rd-closeOverlay {
     position: fixed;
-    right: 20px;
-    top: 5px;
-    height: 30px;
-    width: 30px;
-    line-height: 30px;
-    text-align: center;
-    font-size: 25px;
-    padding: 0;
+    right: 10px;
+    top: 10px;
     opacity: 0.5;
 }
 
@@ -177,6 +171,7 @@ body.rd-overlayActive {
 
 #rd-mainTextContent {
     margin: auto;
+    max-width: calc(100% - 90px); /* margins left for icons on either side */
 }
 
 #rd-commentCount {
