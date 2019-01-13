@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+	<head>
+        <title>readReddit changelog</title>
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="../styles/global.css" media="all">
+		<style>
+			body {
+				font-family: Verdana,Geneva,sans-serif; ;
+				font-size: 14px;
+				padding: 10px;
+				color: rgb(22, 22, 22);
+				margin: 5px;
+				box-sizing: border-box;
+            }
+
+
+            #rd-logo {
+            margin: 25px auto;
+            display: block;
+            }
+
+            #settings-wrapper {
+                max-width: 45em;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            h3 {
+                margin: 0 0 5px 0;
+            }
+
+            h4 {
+                margin: 0 0 5px 0;
+                font-size: 1em;
+                color: #939393;
+            }
+
+			pre,
+			code {
+				margin: 0;
+				padding: 0;
+			}
+
+			label {
+				display: block;
+				margin: 1em 0;
+			}
+
+			.rd-helperText {
+				font-size: 0.8em;
+				color: rgb(66, 66, 66)
+            }
+
+            input {
+                padding: 7px;
+                margin: 7px 0;
+            }
+
+            input[type="text"] {
+            width: 95%;
+            }
+            .rd-section {
+                margin-bottom: 25px;
+                background-color: #f3f3f3;
+                padding: 15px;
+            }
+		</style>
+	</head>
+	<body>
+        <div id="settings-wrapper">
+            <img src="../images/icon128.png" alt="logo" id="rd-logo">
+            <div class="rd-section">
+                <a href="options.html">Back to settings.</a>
+            </div>
+            <div class="rd-section">
+
+                <h3>Changelog</h3>
+                <h4>V0.9</h4>
+                <ul>
+                    <li>Added this changelog.</li>
+                    <li>The overlay can now be closed through hitting the escape key.</li>
+                    <li>In comment mode each comment now has a link icon linking back to the comment.</li>
+                    <li>The text width now plays nicer with the settings and close icons on smaller screens.</li>
+                </ul>
+                <h4>V0.8</h4>
+                <ul>
+                    <li>Better check to determine if old or redesigned reddit is being used.</li>
+                </ul>
+                <h4>V0.7</h4>
+                <ul>
+                    <li>Comments now have a "read" button added that when clicked loads that comment in the read overlay.</li>
+                    <li>Comment crawling has been tweaked to be more robust.</li>
+                </ul>
+                <h4>V0.6</h4>
+                <ul>
+                    <li>Fix the floating button not being clickable in reddit redesign.</li>
+                </ul>
+                <h4>V0.5</h4>
+                <ul>
+                    <li>New and improved options layout.</li>
+                    <li>Settings open now in a new tab.</li>
+                    <li>Add settings icon to overlay so that they are easier to access.</li>
+                </ul>
+                <h4>V0.4</h4>
+                <ul>
+                    <li>Various css fixes.</li>
+                    <li>Functionality added to view comments in subreddits like /r/WritingPrompts.</li>
+                    <li>Behind the scenes refactoring to make the extension easier to maintain.</li>
+                    <li>Properly handle instances where there is no text to show.</li>
+                    <li>Read time indication added.</li>
+                </ul>
+                <h4>V0.3</h4>
+                <ul>
+                    <li>Fix darkmode to actually work...</li>
+                    <li>CSS fixes.</li>
+                    <li>Fix firefox min version in manifest</li>
+                </ul>
+                <h4>V0.2</h4>
+                <ul>
+                    <li>Settings and setting page.</li>
+                    <li>Credits.</li>
+                </ul>
+                <h4>V0.2</h4>
+                <ul>
+                    <li>Initial release with basica functionality for opening text posts in reading mode.</li>
+                </ul>
+            </div>
+        </div>
+	</body>
+
+</html>
