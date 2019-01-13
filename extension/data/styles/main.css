@@ -113,6 +113,10 @@ body.rd-overlayActive #rd-readButton {
     display: none;
 }
 
+.rd-flatlistButton {
+    margin-left: 20px;
+}
+
 /* Hide the body scrollbar when the overlay is active to prevent double bars */
 body.rd-overlayActive {
     overflow: hidden;

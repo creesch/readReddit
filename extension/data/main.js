@@ -137,11 +137,13 @@
                 const permalink = $thing.find('a.bylink').attr('href') || $thing.find('.buttons:first .first a').attr('href');
                 const author = $thing.find('.author:first').text();
                 if(author) {
-                    $thing.find('.flat-list.buttons').eq(0).append(`
-                        <li>
-                            <a href="javascript:;" class="rd-commentRead" data-permalink="${permalink}">read</a>
-                        </li>
-                    `);
+                    requestAnimationFrame(() => {
+                        $thing.find('.flat-list.buttons').eq(0).append(`
+                            <li class="rd-flatlistButton">
+                                <a href="javascript:;" class="rd-commentRead" data-permalink="${permalink}">read</a>
+                            </li>
+                        `);
+                    });
                 }
 
             }
