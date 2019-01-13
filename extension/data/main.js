@@ -129,7 +129,7 @@
     }
 
     function readLinkComments() {
-        const $things = $('.thing:not(.rd-seen)');
+        const $things = $('.thing.comment:not(.rd-seen)');
         $things.each(function() {
             const $thing = $(this);
             if(!$thing.hasClass('rd-seen')) {
@@ -181,7 +181,7 @@
                 addIcon();
 
                 // Check if we are on old reddit and have comments that might
-                if($('.thing').length) {
+                if($('.thing.comment').length) {
                     readLinkComments();
                     utils.domObserver();
                     window.addEventListener('rDNewThings', function () {
