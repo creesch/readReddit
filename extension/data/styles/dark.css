@@ -26,7 +26,7 @@
 
 .rd-dark #rd-textOverlay {
     background-color: #1D1D1D;
-    color: #ececec;
+    color: #c6c6c6;
 }
 
 #rd-commentCount,
@@ -39,14 +39,14 @@
 }
 
 .rd-dark a.rd-commentLink:hover svg {
-    fill: #ececec;
+    fill: #c6c6c6;
 }
 
 .rd-dark #rd-textOverlay h1,
 .rd-dark #rd-textOverlay h2,
 .rd-dark #rd-textOverlay h3,
 .rd-dark #rd-textOverlay h4 {
-    color: #ececec;
+    color: #c6c6c6;
 }
 
 .rd-dark #rd-textOverlay a {
