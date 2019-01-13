@@ -49,7 +49,8 @@ function commentSection(commentArray, modOverride) {
 
         returnArray.push({
             author: commentAuthor,
-            text: returnText
+            text: returnText,
+            permalink: comment.data.permalink
         });
     });
 

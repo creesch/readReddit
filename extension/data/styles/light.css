@@ -34,6 +34,14 @@
     color: #9f9f9f;
 }
 
+.rd-light a.rd-commentLink svg {
+    fill: #535353;
+}
+
+.rd-light  a.rd-commentLink:hover svg {
+    fill: #1d1d1d;
+}
+
 .rd-light #rd-textOverlay h1,
 .rd-light #rd-textOverlay h2,
 .rd-light #rd-textOverlay h3,
