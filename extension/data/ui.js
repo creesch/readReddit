@@ -64,10 +64,17 @@
 
         // Handle overlay closing
         $overlay.on('click', '#rd-closeOverlay', function() {
-            const $this = $(this);
-            $this.closest('#rd-textOverlay').remove();
+            $overlay.remove();
             $body.removeClass('rd-overlayActive');
         });
+
+        $(document).keyup(function(e) {
+            if (e.key === `Escape`) { // escape key maps to keycode `27`
+                $overlay.remove();
+                $body.removeClass('rd-overlayActive');
+            }
+        });
+
         // Open settomgs
         $overlay.on('click', '#rd-settings', function() {
             chrome.runtime.sendMessage({
