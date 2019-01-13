@@ -7,7 +7,7 @@
     left: 0;
     right: 0;
     z-index: 2147483647;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 /* Activation menu */
@@ -120,7 +120,8 @@ body.rd-overlayActive {
 
 /* Area reserved for options. Possibly make into hamburger menu in the future */
 #rd-textOptions {
-    position: fixed;
+    position: sticky;
+    float: left;
     left: 10px;
     top: 10px;
 }
@@ -158,9 +159,10 @@ body.rd-overlayActive {
 
 /* Overlay close button */
 #rd-closeOverlay {
-    position: fixed;
+    position: sticky;
     right: 10px;
     top: 10px;
+    float: right;
     opacity: 0.5;
 }
 
