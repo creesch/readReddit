@@ -8,6 +8,7 @@
         fontFamily: 'Verdana,Geneva,sans-serif',
         fontSize: '16px',
         textWidth: '45em',
+        lineHeight: '1.4em',
         colorMode: 'light'
     };
 

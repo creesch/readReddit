@@ -194,11 +194,6 @@ body.rd-overlayActive {
     margin-bottom: 10em;
   }
 /* Set up all the text styling in such a way that there is (hopefully) minimal disruption from subreddit styles */
-#rd-textOverlay p,
-#rd-textOverlay th,
-#rd-textOverlay td {
-    line-height: 1.4em;
-}
 
 #rd-textOverlay p {
     margin: 0.8em 0;
@@ -217,10 +212,6 @@ body.rd-overlayActive {
 
 #rd-textOverlay ol {
     list-style-type: decimal;
-}
-
-#rd-textOverlay li {
-    line-height: 1.4em;
 }
 
 #rd-textOverlay h1,

@@ -82,10 +82,12 @@
     }
 
     function addIcon() {
-        chrome.storage.local.get(['fontFamily', 'fontSize', 'textWidth', 'colorMode'], function(result) {
+        chrome.storage.local.get(['fontFamily', 'fontSize', 'textWidth', 'lineHeight', 'colorMode'], function(result) {
             utils.currentSettings.fontFamily = result.fontFamily || utils.defaultSettings.fontFamily;
             utils.currentSettings.fontSize = result.fontSize || utils.defaultSettings.fontSize;
             utils.currentSettings.textWidth = result.textWidth || utils.defaultSettings.textWidth;
+            utils.currentSettings.textWidth = result.textWidth || utils.defaultSettings.textWidth;
+            utils.currentSettings.lineHeight = result.lineHeight || utils.defaultSettings.lineHeight;
             utils.currentSettings.colorMode = result.colorMode || utils.defaultSettings.colorMode;
 
             $body.addClass(`rd-${utils.currentSettings.colorMode}`);
@@ -100,6 +102,13 @@
 
                     #rd-mainTextContent {
                         width: ${utils.currentSettings.textWidth};
+                    }
+
+                    #rd-textOverlay p,
+                    #rd-textOverlay th,
+                    #rd-textOverlay td,
+                    #rd-textOverlay li {
+                        line-height: ${utils.currentSettings.lineHeight};
                     }
                 </style>
             `);
