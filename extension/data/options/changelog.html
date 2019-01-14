@@ -7,79 +7,29 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="../styles/global.css" media="all">
-		<style>
-			body {
-				font-family: Verdana,Geneva,sans-serif; ;
-				font-size: 14px;
-				padding: 10px;
-				color: rgb(22, 22, 22);
-				margin: 5px;
-				box-sizing: border-box;
-            }
-
-
-            #rd-logo {
-            margin: 25px auto;
-            display: block;
-            }
-
-            #settings-wrapper {
-                max-width: 45em;
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            h3 {
-                margin: 0 0 5px 0;
-            }
-
-            h4 {
-                margin: 0 0 5px 0;
-                font-size: 1em;
-                color: #939393;
-            }
-
-			pre,
-			code {
-				margin: 0;
-				padding: 0;
-			}
-
-			label {
-				display: block;
-				margin: 1em 0;
-			}
-
-			.rd-helperText {
-				font-size: 0.8em;
-				color: rgb(66, 66, 66)
-            }
-
-            input {
-                padding: 7px;
-                margin: 7px 0;
-            }
-
-            input[type="text"] {
-            width: 95%;
-            }
-            .rd-section {
-                margin-bottom: 25px;
-                background-color: #f3f3f3;
-                padding: 15px;
-                border-radius: 5px;
-            }
-		</style>
+		<link rel="stylesheet" type="text/css" href="../styles/options.css" media="all">
 	</head>
 	<body>
         <div id="settings-wrapper">
             <img src="../images/icon128.png" alt="logo" id="rd-logo">
             <div class="rd-section">
-                <a href="options.html">Back to settings.</a>
+                <ul class="rd-subtle">
+                    <li>Like readReddit? Rate it (<a href="https://chrome.google.com/webstore/detail/readable-text-posts-on-re/kpffhggoghnmcbofgjdccdgflkodakkj" target="_blank" rel="noopener noreferrer">Chrome</a> or <a href="https://addons.mozilla.org/en-US/firefox/addon/readable-text-posts-on-reddit/" target="_blank" rel="noopener noreferrer">Firefox</a>) and let others know about readReddit! </li>
+                    <li>Have questions or feedback? <a href="https://www.reddit.com/r/creesch/comments/af91io/readreddit_a_browser_extension_that_complements/" target="_blank" rel="noopener noreferrer">Leave a comment here</a></li>
+                    <li>Looking for <a href="options.html">settings</a>?</li>
+                </ul>
+
             </div>
             <div class="rd-section">
 
                 <h3>Changelog</h3>
+                <h4>V0.11</h4>
+                <ul>
+                    <li>Added an update notification that links to the changelog. It is made to be very easy to dismiss and hopefully not annoy you too much.</li>
+                    <li>Added line height as option.</li>
+                    <li>Change the extension fullname so it includes the shortname (more consistent naming).</li>
+                    <li>Change the darkmode text color to more of a gray to be less eye straining. </li>
+                </ul>
                 <h4>V0.10</h4>
                 <ul>
                     <li>Slight performance tweak to adding read buttons by using requestAnimationFrame.</li>
