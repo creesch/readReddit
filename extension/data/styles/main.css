@@ -1,6 +1,7 @@
 
 /* Main text overlay base font type and size is set here.*/
 #rd-textOverlay {
+    box-sizing: content-box !important;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -23,6 +24,7 @@ a.rd-commentReadRedesign:hover {
 }
 
 #rd-readButton {
+    box-sizing: content-box !important;
     position: fixed;
     z-index: 2147483647;
     bottom: 50px;
@@ -31,20 +33,22 @@ a.rd-commentReadRedesign:hover {
 
 #rd-buttonPost,
 #rd-buttonComments {
-  backface-visibility: hidden;
-  visibility: hidden;
-  font-family: Verdana,Geneva,sans-serif;
-  font-size: 12px;
-  font-weight: bold;
-  opacity: 0;
-  width: 0px;
-  overflow: hidden;
-  height: 12px;
-  padding: 10px;
-  cursor: pointer;
-  transition-property:opacity width;
-  transition-duration: 300ms;
-  transition-timing-function: linear;
+    line-height: 12px;
+    box-sizing: content-box !important;
+    backface-visibility: hidden;
+    visibility: hidden;
+    font-family: Verdana,Geneva,sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    opacity: 0;
+    width: 0px;
+    overflow: hidden;
+    height: 12px;
+    padding: 10px;
+    cursor: pointer;
+    transition-property:opacity width;
+    transition-duration: 300ms;
+    transition-timing-function: linear;
 }
 
 #rd-readButton:hover #rd-buttonPost,
@@ -64,6 +68,7 @@ a.rd-commentReadRedesign:hover {
 }
 
 #rd-readIcon {
+    box-sizing: content-box !important;
     display: block;
     z-index: 2147483647;
     width: 35px;
@@ -123,24 +128,26 @@ body.rd-overlayActive {
 }
 
 /* Area reserved for options. Possibly make into hamburger menu in the future */
-#rd-textOptions {
+.rd-overlayActive #rd-textOptions {
+    box-sizing: content-box !important;
     position: sticky;
     float: left;
     left: 10px;
     top: 10px;
 }
 
-#rd-textOptions div {
+.rd-overlayActive #rd-textOptions div {
     cursor: pointer;
     opacity: 0.5;
 }
 
-#rd-textOptions div:hover {
+.rd-overlayActive #rd-textOptions div:hover {
     opacity: 1;
 }
 
 /* Color mode icon */
-#rd-colorMode {
+.rd-overlayActive #rd-colorMode {
+    box-sizing: content-box !important;
     margin-bottom: 1em;
 }
 
@@ -162,7 +169,7 @@ body.rd-overlayActive {
 }
 
 /* Overlay close button */
-#rd-closeOverlay {
+.rd-overlayActive #rd-closeOverlay {
     position: sticky;
     right: 10px;
     top: 10px;
@@ -170,108 +177,109 @@ body.rd-overlayActive {
     opacity: 0.5;
 }
 
-#rd-closeOverlay:hover {
+.rd-overlayActive #rd-closeOverlay:hover {
     cursor: pointer;
     opacity: 1;
 }
 
-#rd-mainTextContent {
+.rd-overlayActive #rd-mainTextContent {
     margin: auto;
     max-width: calc(100% - 90px); /* margins left for icons on either side */
+    box-sizing: content-box !important;
 }
 
-#rd-commentCount {
+.rd-overlayActive #rd-commentCount {
     margin: 1em 0 4em 0;
 }
 
-#rd-commentCount,
-#rd-textOverlay p.rd-readingTime {
+.rd-overlayActive #rd-commentCount,
+.rd-overlayActive #rd-textOverlay p.rd-readingTime {
     font-size: 0.8em;
     font-weight: bold;
 }
 
-.rd-comment {
+.rd-overlayActive .rd-comment {
     margin-bottom: 10em;
   }
 /* Set up all the text styling in such a way that there is (hopefully) minimal disruption from subreddit styles */
 
-#rd-textOverlay p {
+.rd-overlayActive #rd-textOverlay p {
     margin: 0.8em 0;
 }
 
 
-#rd-textOverlay ul,
-#rd-textOverlay ol {
+.rd-overlayActive #rd-textOverlay ul,
+.rd-overlayActive #rd-textOverlay ol {
     padding-left: 2em;
     margin: 0.5em 0;
 }
 
-#rd-textOverlay ul {
+.rd-overlayActive #rd-textOverlay ul {
     list-style-type: disc;
 }
 
-#rd-textOverlay ol {
+.rd-overlayActive #rd-textOverlay ol {
     list-style-type: decimal;
 }
 
-#rd-textOverlay h1,
-#rd-textOverlay h2,
-#rd-textOverlay h3,
-#rd-textOverlay h4 {
+.rd-overlayActive #rd-textOverlay h1,
+.rd-overlayActive #rd-textOverlay h2,
+.rd-overlayActive #rd-textOverlay h3,
+.rd-overlayActive #rd-textOverlay h4 {
     font-weight: bold;
     margin: 10px 0 5px 0;
 }
 
-#rd-textOverlay h1 {
+.rd-overlayActive #rd-textOverlay h1 {
     font-size: 1.6em;
 }
 
-#rd-textOverlay h2 {
+.rd-overlayActive #rd-textOverlay h2 {
     font-size: 1.4em;
 }
 
-#rd-textOverlay h3 {
+.rd-overlayActive #rd-textOverlay h3 {
     font-size: 1.2em;
 }
 
-#rd-textOverlay h4 {
+.rd-overlayActive #rd-textOverlay h4 {
     font-size: 1.1em;
 }
 
-#rd-textOverlay a {
+.rd-overlayActive #rd-textOverlay a {
     font-weight: inherit;
     font-style: inherit;
     text-decoration: none;
 }
 
-#rd-textOverlay a:hover {
+.rd-overlayActive #rd-textOverlay a:hover {
     text-decoration: underline;
 }
 
-#rd-textOverlay a:visited {
+.rd-overlayActive #rd-textOverlay a:visited {
     text-decoration: none;
 }
 
-#rd-textOverlay em {
+.rd-overlayActive #rd-textOverlay em {
     font-style: italic;
 }
 
-#rd-textOverlay strong {
+.rd-overlayActive #rd-textOverlay strong {
     font-style: inherit;
     font-weight: bold;
 }
 
 /*  quotes */
-#rd-textOverlay blockquote {
+.rd-overlayActive #rd-textOverlay blockquote {
 	display: block;
-	margin: 5px 5px;
-	padding: 5px;
+	margin: 5px 10px;
+	padding: 5px 10px;
 	position: relative;
 }
 
 /* code block */
 
-#rd-textOverlay pre {
+.rd-overlayActive #rd-textOverlay pre {
     border: 0;
     padding: 1em;
     overflow: auto;
@@ -284,17 +292,17 @@ body.rd-overlayActive {
 }
 
 /* tables */
-#rd-textOverlay table {
+.rd-overlayActive #rd-textOverlay table {
     border-collapse: collapse;
     border-spacing: 0;
     margin: 10px 0;
 }
 
-#rd-textOverlay table thead th {
+.rd-overlayActive #rd-textOverlay table thead th {
     padding: 0.5em;
     font-weight: bold;
 }
 
-#rd-textOverlay table tbody td {
+.rd-overlayActive #rd-textOverlay table tbody td {
     padding: 0.5em;
 }
