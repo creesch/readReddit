@@ -82,14 +82,18 @@
     }
 
     function addIcon() {
-        chrome.storage.local.get(['fontFamily', 'fontSize', 'textWidth', 'lineHeight', 'colorMode'], function(result) {
+        chrome.storage.local.get(['fontFamily', 'fontSize', 'textWidth', 'lineHeight', 'colorMode', 'seenVersion'], function(result) {
             utils.currentSettings.fontFamily = result.fontFamily || utils.defaultSettings.fontFamily;
             utils.currentSettings.fontSize = result.fontSize || utils.defaultSettings.fontSize;
             utils.currentSettings.textWidth = result.textWidth || utils.defaultSettings.textWidth;
             utils.currentSettings.textWidth = result.textWidth || utils.defaultSettings.textWidth;
             utils.currentSettings.lineHeight = result.lineHeight || utils.defaultSettings.lineHeight;
             utils.currentSettings.colorMode = result.colorMode || utils.defaultSettings.colorMode;
+            utils.currentSettings.seenVersion = result.seenVersion || utils.defaultSettings.seenVersion;
 
+            if(utils.manifest.version !== utils.currentSettings.seenVersion) {
+                $body.addClass(`rd-updated`);
+            }
             $body.addClass(`rd-${utils.currentSettings.colorMode}`);
 
             // Insert css that depends on variables.
@@ -116,11 +120,26 @@
             const $readIcon = $(`
                 <div id="rd-readButton">
                     <div id="rd-buttonPost">
-                    Text post
+                        Text post
                     </div>
-                <div id="rd-readIcon">
-                    <img src="${chrome.runtime.getURL('data/images/icon48.png')}">
-                </div>
+                    <div id="rd-updated">
+                        <span id="rd-changelog">
+                            changelog
+                        </span>
+                        <span id="rd-dismissUpdated">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="14px" height="14px">
+                                <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z" class=""></path>
+                            </svg>
+                        </span>
+                        <span id="rd-updatedExclamation">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="14px" width="14px">
+                                <path d="M504 256c0 136.997-111.043 248-248 248S8 392.997 8 256C8 119.083 119.043 8 256 8s248 111.083 248 248zm-248 50c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"></path>
+                            </svg>
+                        </span>
+                    </div>
+                    <div id="rd-readIcon">
+                        <img src="${chrome.runtime.getURL('data/images/icon48.png')}">
+                    </div>
                     <div id="rd-buttonComments">
                     Comments
                     </div>
@@ -133,6 +152,14 @@
 
             $readIcon.on('click', '#rd-buttonComments', () => {
                 activateSelfPostOverlay({type: 'comments'});
+            });
+
+            $readIcon.on('click', '#rd-dismissUpdated', () => {
+                utils.dismissUpdate();
+            });
+
+            $readIcon.on('click', '#rd-changelog', () => {
+                utils.openChangelog();
             });
         });
     }

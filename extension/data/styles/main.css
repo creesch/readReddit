@@ -11,6 +11,78 @@
     overflow-y: auto;
 }
 
+
+/* Update notification */
+#rd-updated {
+    display: none;
+}
+
+.rd-updated #rd-readIcon {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.rd-updated #rd-updated {
+    display: inline-block;
+    font-family: Verdana,Geneva,sans-serif;
+    background-color: transparent;
+    padding: 0;
+    vertical-align: middle;
+    font-size: 11px;
+    border-radius: 5px;
+
+    transition-property:background;
+    transition-duration: 500ms;
+    transition-timing-function: linear;
+}
+
+.rd-updated #rd-readButton:hover #rd-updated {
+    padding: 5px;
+    margin-right: 5px;
+}
+
+#rd-changelog {
+    display: none;
+}
+#rd-readButton:hover #rd-changelog {
+    margin-right: 5px;
+    display: inline;
+    cursor: pointer;
+}
+
+#rd-changelog:hover {
+    text-decoration: underline;
+}
+
+
+#rd-updatedExclamation {
+    display: inline-block;
+}
+#rd-dismissUpdated {
+    display: none;
+}
+
+#rd-readButton:hover #rd-updatedExclamation {
+    display: none;
+}
+
+#rd-readButton:hover #rd-dismissUpdated {
+    display: inline-block;
+}
+
+#rd-dismissUpdated:hover svg {
+    border-radius: 10px;
+}
+
+#rd-updatedExclamation,
+#rd-dismissUpdated {
+    cursor: pointer;
+    font-weight: bold;
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+}
+
 /* Activation menu */
 a.rd-commentReadRedesign {
     font-size: 12px;
@@ -57,6 +129,17 @@ a.rd-commentReadRedesign:hover {
   width: 75px;
   visibility: visible;
   opacity: 1;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+
+#rd-readButton:hover #rd-buttonPost {
+    border-radius: 5px 5px 0 5px;
+}
+
+#rd-readButton:hover #rd-buttonComments {
+    border-radius: 5px 0 5px 5px;
 }
 
 #rd-readButton:hover #rd-readIcon {

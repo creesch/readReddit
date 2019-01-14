@@ -1,3 +1,26 @@
+/* Update notification */
+.rd-light #rd-updated {
+    color: #381d1d;
+}
+
+.rd-light #rd-readButton:hover #rd-updated {
+    background-color: #dededeb9;
+}
+
+.rd-light #rd-readButton #rd-updated:hover {
+    background-color: #dedede;
+}
+
+.rd-light #rd-dismissUpdated:hover svg {
+    background-color: #123c5a;
+}
+
+.rd-light #rd-updatedExclamation,
+.rd-light #rd-dismissUpdated {
+    fill: #4c87bc;
+}
+
+
 .rd-light #rd-buttonPost,
 .rd-light #rd-buttonComments,
 .rd-light #rd-readIcon {

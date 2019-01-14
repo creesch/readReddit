@@ -1,6 +1,6 @@
 /** @namespace  utils */
 (function (utils) {
-
+    utils.manifest = chrome.runtime.getManifest();
     utils.mdRegex = /<div class="md">([\s\S]*?)<\/div>/m;
     utils.pathRegex = /^\/r\/[^/]*?\/comments\/[^/]*?\//;
 
@@ -9,11 +9,13 @@
         fontSize: '16px',
         textWidth: '45em',
         lineHeight: '1.4em',
-        colorMode: 'light'
+        colorMode: 'light',
+        seenVersion: 'none'
     };
 
     utils.currentSettings = {};
 
+    // Dom observer, for adding read buttons to comments.
     let observerActive = false;
     utils.domObserver = function() {
         if(observerActive) {
@@ -59,6 +61,7 @@
         observer.observe(target, config);
     };
 
+    // Digg through a comment chain to attach all comments by OP
     utils.commentChainDigger = function(commentArray, authorName, callback) {
         chrome.runtime.sendMessage({
             action: 'commentChainDigger',
@@ -72,6 +75,7 @@
         });
     };
 
+    // Go through all top level comments provided digg through the chain for each.
     utils.commentSection = function(options, callback) {
         chrome.runtime.sendMessage({
             action: 'commentSection',
@@ -83,4 +87,32 @@
             return callback(response.comments);
         });
     };
+
+    function dismissUpdate() {
+        $('body').removeClass('rd-updated');
+
+        utils.currentSettings.seenVersion = utils.manifest.version;
+        chrome.storage.local.set({seenVersion : utils.currentSettings.seenVersion});
+
+        chrome.runtime.sendMessage({
+            action: 'globalMessage',
+            globalEvent: 'dismissUpdate'
+        });
+    }
+    utils.dismissUpdate = dismissUpdate;
+
+    utils.openChangelog = function() {
+        chrome.runtime.sendMessage({
+            action: 'openChangelog'
+        });
+        dismissUpdate();
+    };
+
+    // Handle background messages.
+    chrome.runtime.onMessage.addListener(function(message) {
+        if(message.action === 'dismissUpdate') {
+            $('body').removeClass('rd-updated');
+        }
+    });
+
 }(utils = window.utils || {}));

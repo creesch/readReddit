@@ -58,11 +58,33 @@ function commentSection(commentArray, modOverride) {
 }
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    console.log('background request:', request);
+
+    if(request.action === 'globalMessage' ) {
+        const message = {
+            action: request.globalEvent
+        };
+
+        chrome.tabs.query({}, function(tabs) {
+            for (let i = 0; i < tabs.length; ++i) {
+                if(sender.tab.id !== tabs[i].id) {
+                    chrome.tabs.sendMessage(tabs[i].id, message);
+                }
+
+            }
+        });
+    }
+
+    if(request.action === 'openChangelog') {
+        chrome.tabs.create({
+            url: chrome.runtime.getURL('data/options/changelog.html')
+        });
+    }
+
     if(request.action === 'commentChainDigger') {
         const commentArray = request.details.commentArray;
         const authorName = request.details.authorName;
         sendResponse({comments: commentChainDigger(commentArray, authorName)});
-        return true;
     }
 
     if(request.action === 'commentSection') {
@@ -71,10 +93,11 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         const returnArray = commentSection(commentArray, modOverride);
 
         sendResponse({comments: returnArray});
-        return true;
     }
 
     if(request.action === 'openOptions') {
         chrome.runtime.openOptionsPage();
     }
+
+    return true;
 });
