@@ -218,14 +218,17 @@
             if(utils.pathRegex.test(locationPathname)) {
                 addIcon();
 
-                // Check if we are on old reddit and have comments that might
-                if($('.thing.comment').length) {
-                    readLinkComments();
+                // We are on old reddit, start watching for future comments.
+                if($('#header').length) {
                     utils.domObserver();
                     window.addEventListener('rDNewThings', function () {
                         readLinkComments();
                     });
+                }
 
+                // Check if we are on old reddit and have comments that might need to be watched.
+                if($('.thing.comment').length) {
+                    readLinkComments();
                     $body.on('click', '.rd-commentRead', function() {
                         const permalink = $(this).attr('data-permalink');
                         activateSelfPostOverlay({type: 'comments', permalink: permalink, modOverride: true});

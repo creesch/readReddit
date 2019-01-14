@@ -31,8 +31,7 @@
         const observer = new MutationObserver(function (mutations) {
             mutations.forEach(function (mutation) {
                 const $target = $(mutation.target), $parentNode = $(mutation.target.parentNode);
-                if (!($target.hasClass('sitetable') && ($target.hasClass('nestedlisting') || $target.hasClass('listing') || $target.hasClass('linklisting') ||
-                $target.hasClass('modactionlisting'))) && !$parentNode.hasClass('morecomments') && !$target.hasClass('flowwit')) return;
+                if (!($target.hasClass('sitetable') && ($target.hasClass('nestedlisting') || $target.hasClass('listing') || $target.hasClass('linklisting'))) && !$parentNode.hasClass('morecomments') && !$target.hasClass('flowwit')) return;
 
                 // It is entirely possible that rDNewThings is fired multiple times.
                 // That is why we only set a new timeout if there isn't one set already.
