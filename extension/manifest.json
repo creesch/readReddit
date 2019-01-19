@@ -46,6 +46,7 @@
             ],
             "js": [
                 "data/libs/jquery-3.3.1.min.js",
+                "data/libs/jquery.viewportchecker.js",
                 "data/libs/readingtime.js",
                 "data/libs/purify.js",
                 "data/listener.js",

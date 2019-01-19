@@ -166,10 +166,10 @@
 
     function readLinkComments() {
         const $things = $('.thing.comment:not(.rd-seen)');
-        $things.each(function() {
-            const $thing = $(this);
-            if(!$thing.hasClass('rd-seen')) {
-                $thing.addClass('rd-seen');
+        $things.viewportChecker({
+            classToAdd: 'rd-seen',
+            callbackFunction: function(thing) {
+                const $thing = $(thing);
                 const permalink = $thing.find('a.bylink').attr('href') || $thing.find('.buttons:first .first a').attr('href');
                 const author = $thing.find('.author:first').text();
                 if(author) {
