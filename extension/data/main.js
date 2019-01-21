@@ -82,7 +82,7 @@
     }
 
     function addIcon() {
-        chrome.storage.local.get(['fontFamily', 'fontSize', 'textWidth', 'lineHeight', 'colorMode', 'seenVersion'], function(result) {
+        chrome.storage.local.get(['fontFamily', 'fontSize', 'textWidth', 'lineHeight', 'colorMode', 'seenVersion', 'textAlign'], function(result) {
             utils.currentSettings.fontFamily = result.fontFamily || utils.defaultSettings.fontFamily;
             utils.currentSettings.fontSize = result.fontSize || utils.defaultSettings.fontSize;
             utils.currentSettings.textWidth = result.textWidth || utils.defaultSettings.textWidth;
@@ -90,6 +90,7 @@
             utils.currentSettings.lineHeight = result.lineHeight || utils.defaultSettings.lineHeight;
             utils.currentSettings.colorMode = result.colorMode || utils.defaultSettings.colorMode;
             utils.currentSettings.seenVersion = result.seenVersion || utils.defaultSettings.seenVersion;
+            utils.currentSettings.textAlign = result.textAlign || utils.defaultSettings.textAlign;
 
             if(utils.manifest.version !== utils.currentSettings.seenVersion) {
                 $body.addClass(`rd-updated`);
@@ -107,6 +108,7 @@
                     #rd-overlayFooter,
                     #rd-mainTextContent {
                         width: ${utils.currentSettings.textWidth};
+                        text-align: ${utils.currentSettings.textAlign};
                     }
 
                     #rd-textOverlay p,

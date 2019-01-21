@@ -13,6 +13,7 @@ margin: 25px auto;
 display: block;
 }
 
+
 #settings-wrapper {
     max-width: 45em;
     margin-left: auto;
@@ -22,6 +23,10 @@ display: block;
 ul.rd-subtle {
     font-size: 0.9em;
     color: #4d4d4d;
+}
+
+label {
+    margin-bottom: 1em;
 }
 
 a {
@@ -71,6 +76,7 @@ label {
     color: rgb(66, 66, 66)
 }
 
+select,
 input {
     padding: 7px;
     margin: 7px 0;
@@ -78,11 +84,14 @@ input {
     border: solid 1px #D1D1D1;
 }
 
+select,
 input[type="text"] {
+    box-sizing: content-box;
     width: 95%;
     background-color: #fff;
 }
 
+select:focus,
 input:focus {
     border-color: #33C3F0;
     outline: 0;

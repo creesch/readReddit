@@ -21,6 +21,13 @@
 
             </div>
             <div class="rd-section">
+                <h3>Color mode</h3>
+                <label>
+                    <select id="rd-colorMode">
+                        <option value="light">light</option>
+                        <option value="dark">dark</option>
+                    </select>
+                </label>
                 <h3>Font family</h3>
                 <label>
                     <span class="rd-helperText">You can use any font here that is available on your computer.</span><br>
@@ -35,6 +42,18 @@
                 <label>
                     <span class="rd-helperText">By default 45em is used as that results in roughly the line width that studies have found to be most pleasant to read. You can use any unit that is valid in css. <a href="https://www.w3schools.com/cssref/css_units.asp">css units</a></span><br>
                     <input type="text" id="rd-textWidth">
+                </label>
+                <h3>Text alignment</h3>
+                <label>
+                    <span class="rd-helperText"><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-align">Value explanations.</a></span><br>
+                    <select id="rd-textAlign">
+                        <option value="left">left</option>
+                        <option value="right">right</option>
+                        <option value="center">center</option>
+                        <option value="justify">justify</option>
+                        <option value="start">start</option>
+                        <option value="end">end</option>
+                    </select>
                 </label>
                 <h3>Line height</h3>
                 <label>

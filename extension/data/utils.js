@@ -10,7 +10,8 @@
         textWidth: '45em',
         lineHeight: '1.4em',
         colorMode: 'light',
-        seenVersion: 'none'
+        seenVersion: 'none',
+        textAlign: 'left'
     };
 
     utils.currentSettings = {};
