@@ -46,6 +46,16 @@
     fill: #949494;
 }
 
+.rd-dark #rd-doneButton {
+    border-color: #80808047;
+    color: #80808047;
+}
+
+.rd-dark #rd-doneButton:hover {
+    border-color: #808080;
+    color: #808080;
+}
+
 .rd-dark #rd-textOverlay {
     background-color: #1D1D1D;
     color: #c6c6c6;

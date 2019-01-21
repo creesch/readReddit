@@ -104,6 +104,7 @@
                         font-size: ${utils.currentSettings.fontSize};
                     }
 
+                    #rd-overlayFooter,
                     #rd-mainTextContent {
                         width: ${utils.currentSettings.textWidth};
                     }

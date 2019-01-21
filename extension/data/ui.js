@@ -37,6 +37,9 @@
                     ${title}
                 </h1>
             </div>
+            <div id="rd-overlayFooter">
+                <div id="rd-doneButton">Done</div>
+            </div>
         </div>
         `);
         $overlay.find('#rd-mainTextContent').append(content);
@@ -63,7 +66,7 @@
         $body.addClass('rd-overlayActive');
 
         // Handle overlay closing
-        $overlay.on('click', '#rd-closeOverlay', function() {
+        $overlay.on('click', '#rd-closeOverlay, #rd-doneButton', function() {
             $overlay.remove();
             $body.removeClass('rd-overlayActive');
         });

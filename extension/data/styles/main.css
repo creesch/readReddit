@@ -265,6 +265,19 @@ body.rd-overlayActive {
     opacity: 1;
 }
 
+#rd-doneButton {
+    border: solid 1px;
+    border-radius: 5px;
+    width: 50%;
+    margin: 2em auto;
+    text-align: center;
+    padding: 1em;
+    font-size: 1.4em;
+    cursor: pointer;
+}
+
+
+.rd-overlayActive #rd-overlayFooter,
 .rd-overlayActive #rd-mainTextContent {
     margin: auto;
     max-width: calc(100% - 90px); /* margins left for icons on either side */
