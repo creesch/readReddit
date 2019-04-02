@@ -28,6 +28,7 @@
     "background": {
         "scripts": [
             "data/libs/purify.js",
+            "data/libs/jquery-3.3.1.min.js",
             "data/background/background.js"
         ],
         "persistent": false

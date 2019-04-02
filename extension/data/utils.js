@@ -61,6 +61,19 @@
         observer.observe(target, config);
     };
 
+    // do get requests through the background page so Chrome doesn't break.
+    utils.backgroundGetJSON = function(url, options = {}, callback) {
+        chrome.runtime.sendMessage({
+            action: 'backgroundGetJSON',
+            details: {
+                url: url,
+                options: options
+            }
+        }, function(response) {
+            return callback(response);
+        });
+    };
+
     // Digg through a comment chain to attach all comments by OP
     utils.commentChainDigger = function(commentArray, authorName, callback) {
         chrome.runtime.sendMessage({
@@ -71,7 +84,6 @@
             }
         }, function(response) {
             return callback(response.comments);
-
         });
     };
 

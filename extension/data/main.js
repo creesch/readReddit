@@ -14,7 +14,7 @@
             jsonUrl = `${options.permalink}.json`;
         }
 
-        $.getJSON(jsonUrl, {raw_json : 1}).done((data) => {
+        utils.backgroundGetJSON(jsonUrl, {raw_json : 1}, (data) => {
             // Handle self post
             if(options.type === 'post') {
                 if(!data[0].data.children[0].data.is_self || !data[0].data.children[0].data.selftext_html) {

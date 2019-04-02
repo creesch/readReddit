@@ -81,6 +81,15 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         });
     }
 
+    if(request.action === 'backgroundGetJSON') {
+        const url = request.details.url;
+        const options = request.details.options;
+
+        $.getJSON(url, options).done((data) => {
+            sendResponse(data);
+        });
+    }
+
     if(request.action === 'commentChainDigger') {
         const commentArray = request.details.commentArray;
         const authorName = request.details.authorName;
@@ -91,13 +100,12 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         const commentArray = request.details.commentArray;
         const modOverride = request.details.modOverride;
         const returnArray = commentSection(commentArray, modOverride);
-
         sendResponse({comments: returnArray});
     }
 
     if(request.action === 'openOptions') {
         chrome.runtime.openOptionsPage();
     }
-
     return true;
+
 });
