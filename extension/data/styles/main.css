@@ -300,12 +300,16 @@ body.rd-overlayActive {
 /* Set up all the text styling in such a way that there is (hopefully) minimal disruption from subreddit styles */
 
 .rd-overlayActive #rd-textOverlay p {
+    font-family: inherit;
+    font-size: inherit;
     margin: 0.8em 0;
 }
 
 
 .rd-overlayActive #rd-textOverlay ul,
 .rd-overlayActive #rd-textOverlay ol {
+    font-family: inherit;
+    font-size: inherit;
     padding-left: 2em;
     margin: 0.5em 0;
 }
@@ -322,6 +326,7 @@ body.rd-overlayActive {
 .rd-overlayActive #rd-textOverlay h2,
 .rd-overlayActive #rd-textOverlay h3,
 .rd-overlayActive #rd-textOverlay h4 {
+    font-family: inherit;
     font-weight: bold;
     margin: 10px 0 5px 0;
 }
@@ -343,6 +348,7 @@ body.rd-overlayActive {
 }
 
 .rd-overlayActive #rd-textOverlay a {
+    font-family: inherit;
     font-weight: inherit;
     font-style: inherit;
     text-decoration: none;
@@ -357,16 +363,22 @@ body.rd-overlayActive {
 }
 
 .rd-overlayActive #rd-textOverlay em {
+    font-family: inherit;
+    font-size: inherit;
     font-style: italic;
 }
 
 .rd-overlayActive #rd-textOverlay strong {
+    font-family: inherit;
+    font-size: inherit;
     font-style: inherit;
     font-weight: bold;
 }
 
 /*  quotes */
 .rd-overlayActive #rd-textOverlay blockquote {
+    font-family: inherit;
+    font-size: inherit;
 	display: block;
 	margin: 5px 10px;
 	padding: 5px 10px;
@@ -376,6 +388,7 @@ body.rd-overlayActive {
 /* code block */
 
 .rd-overlayActive #rd-textOverlay pre {
+    font-size: inherit;
     border: 0;
     padding: 1em;
     overflow: auto;
@@ -389,16 +402,22 @@ body.rd-overlayActive {
 
 /* tables */
 .rd-overlayActive #rd-textOverlay table {
+    font-family: inherit;
+    font-size: inherit;
     border-collapse: collapse;
     border-spacing: 0;
     margin: 10px 0;
 }
 
 .rd-overlayActive #rd-textOverlay table thead th {
+    font-family: inherit;
+    font-size: inherit;
     padding: 0.5em;
     font-weight: bold;
 }
 
 .rd-overlayActive #rd-textOverlay table tbody td {
+    font-family: inherit;
+    font-size: inherit;
     padding: 0.5em;
 }
