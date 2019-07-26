@@ -2,7 +2,7 @@
 (function (utils) {
     utils.manifest = chrome.runtime.getManifest();
     utils.mdRegex = /<div class="md">([\s\S]*?)<\/div>/m;
-    utils.pathRegex = /^\/r\/[^/]*?\/comments\/[^/]*?\//;
+    utils.pathRegex = /^\/(r|user)\/[^/]*?\/comments\/[^/]*?\//;
 
     utils.defaultSettings = {
         fontFamily: 'Verdana,Geneva,sans-serif',
