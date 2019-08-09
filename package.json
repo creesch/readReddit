@@ -1,0 +1,23 @@
+{
+  "name": "readreddit",
+  "version": "0.13.0",
+  "private": true,
+  "description": "readReddit adds a pleasant & clutter free reading mode for reddit text posts and comments. ",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/creesch/readReddit.git"
+  },
+  "author": "Creesch",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/creesch/readReddit/issues"
+  },
+  "homepage": "https://github.com/creesch/readReddit#readme",
+  "dependencies": {
+    "archiver": "^3.1.1",
+    "yargs": "^13.3.0"
+  }
+}
