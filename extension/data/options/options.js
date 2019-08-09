@@ -1,8 +1,7 @@
-(function() {
-
+'use strict';
+(function () {
     const currentSettings = {};
-    chrome.storage.local.get(['fontFamily', 'fontSize', 'textWidth', 'lineHeight', 'colorMode', 'textAlign'], function(result) {
-
+    chrome.storage.local.get(['fontFamily', 'fontSize', 'textWidth', 'lineHeight', 'colorMode', 'textAlign'], result => {
         currentSettings.colorMode = result.colorMode || utils.defaultSettings.colorMode;
         $('#rd-colorMode').val(currentSettings.colorMode);
 
@@ -20,7 +19,6 @@
 
         currentSettings.textAlign = result.textAlign || utils.defaultSettings.textAlign;
         $('#rd-textAlign').val(currentSettings.textAlign);
-
     });
 
     $('#rd-save').on('click', () => {
@@ -37,7 +35,6 @@
         currentSettings.textAlign = $('#rd-textAlign').val() || utils.defaultSettings.textAlign;
 
         chrome.storage.local.set(currentSettings, () => {
-
             UI.feedbackText('settings saved', UI.FEEDBACK_POSITIVE);
         });
     });

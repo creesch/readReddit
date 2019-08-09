@@ -1,12 +1,13 @@
-(function() {
+'use strict';
+(function () {
     /**
      * Event listener aliases. Allows you to listen for `author` and get `postAuthor` and `commentAuthor` events,
      * for example.
      * @type {Object.<string, Array<string>>}
      */
     const listenerAliases = {
-        'postAuthor': ['author'],
-        'commentAuthor': ['author'],
+        postAuthor: ['author'],
+        commentAuthor: ['author'],
     };
 
     /**
@@ -17,7 +18,7 @@
      *
      * @private
      */
-    function runTasks(tasks) {
+    function runTasks (tasks) {
         let task;
         while ((task = tasks.shift())) {
             task();
@@ -31,7 +32,7 @@
      * @param  {*} item
      * @return {Boolean}
      */
-    function remove(array, item) {
+    function remove (array, item) {
         const index = array.indexOf(item);
         return !!~index && !!array.splice(index, 1);
     }
@@ -40,7 +41,7 @@
         /**
          * Create a new instance of redesignListener. Nothing happens yet until redesignListener.start() has been called
          */
-        constructor() {
+        constructor () {
             // Simple array holding callbacks waiting to be handled.
             // If you want to put something in here directly, make sure to call scheduleFlush()
             this.queue = [];
@@ -66,7 +67,7 @@
          *
          * A `redesignListenerLoaded` event is fired when everything is ready.
          */
-        start() {
+        start () {
             if (!this.started) {
                 const loadedEvent = new CustomEvent('redesignListenerLoaded');
 
@@ -89,7 +90,7 @@
         /**
          * Unregisters this instance's event listener
          */
-        stop() {
+        stop () {
             if (this.started) {
                 document.removeEventListener('reddit', this.boundFunc);
                 this.started = false;
@@ -102,7 +103,7 @@
          * @param {string} Name of event
          * @param {redesignListener~listenerCallback} Callback
          */
-        on(event, callback) {
+        on (event, callback) {
             if (!this.listeners[event]) {
                 this.listeners[event] = [];
             }
@@ -126,17 +127,17 @@
          * @param {CustomEvent}
          * @private
          */
-        listener(event) {
+        listener (event) {
             const eventType = event.detail.type;
             const target = event.target.querySelector('[data-name="readreddit"]');
 
             // If there is no target this is not for us.
-            if(!target) {
+            if (!target) {
                 return;
             }
 
             // We already have seen this attribute and do not need duplicates.
-            if(target.classList.contains('rd-frontend-container')) {
+            if (target.classList.contains('rd-frontend-container')) {
                 return;
             }
 
@@ -185,7 +186,7 @@
          * @return {Boolean} success
          * @public
          */
-        clear(task) {
+        clear (task) {
             return remove(this.queue, task);
         }
 
@@ -195,7 +196,7 @@
          *
          * @private
          */
-        scheduleFlush() {
+        scheduleFlush () {
             if (!this.scheduled) {
                 this.scheduled = true;
                 requestAnimationFrame(this.flush.bind(this));
@@ -211,13 +212,15 @@
          *
          * @private
          */
-        flush() {
+        flush () {
             const queue = this.queue;
             let error;
 
             try {
                 runTasks(queue);
-            } catch (e) { error = e; }
+            } catch (e) {
+                error = e;
+            }
 
             this.scheduled = false;
 
@@ -228,14 +231,16 @@
 
             if (error) {
                 console.error('task errored', error.message);
-                if (this.catch) this.catch(error);
-                else throw error;
+                if (this.catch) {
+                    this.catch(error);
+                } else {
+                    throw error;
+                }
             }
         }
-
     }
 
-    if(!$('#header').length) {
+    if (!$('#header').length) {
         window.redesignListener = new redesignListener();
     }
 })();

@@ -1,23 +1,24 @@
-(function() {
+'use strict';
+(function () {
     const $body = $('body');
     let locationPathname;
     let firstInit = true;
 
     // Show the overlay with readable text.
-    function activateSelfPostOverlay(options) {
+    function activateSelfPostOverlay (options) {
         $body.addClass('rd-overlayLoading');
         // Create the api request URL. Done like this so it will also work on reddit redesign.
         let jsonUrl;
-        if(!options.permalink) {
+        if (!options.permalink) {
             jsonUrl = `https://old.reddit.com${location.pathname}.json`;
         } else {
             jsonUrl = `${options.permalink}.json`;
         }
 
-        utils.backgroundGetJSON(jsonUrl, {raw_json : 1}, (data) => {
+        utils.backgroundGetJSON(jsonUrl, {raw_json: 1}, data => {
             // Handle self post
-            if(options.type === 'post') {
-                if(!data[0].data.children[0].data.is_self || !data[0].data.children[0].data.selftext_html) {
+            if (options.type === 'post') {
+                if (!data[0].data.children[0].data.is_self || !data[0].data.children[0].data.selftext_html) {
                     UI.feedbackText('Not a text post or no text in post', UI.FEEDBACK_NEGATIVE, 3000, UI.DISPLAY_CURSOR);
                     $body.removeClass('rd-overlayLoading');
                     return;
@@ -26,7 +27,7 @@
                 const title = DOMPurify.sanitize(data[0].data.children[0].data.title);
                 const selfTextHTML = DOMPurify.sanitize(data[0].data.children[0].data.selftext_html.match(utils.mdRegex)[1]);
 
-                utils.commentChainDigger(data[1].data.children, data[0].data.children[0].data.author, (result) => {
+                utils.commentChainDigger(data[1].data.children, data[0].data.children[0].data.author, result => {
                     const continuedInComments = result || '';
                     const content = `
                     <p class="rd-readingTime">
@@ -41,9 +42,9 @@
                 });
             }
 
-            if(options.type === 'comments') {
+            if (options.type === 'comments') {
                 // Handle comments
-                if(!data[1].data.children.length) {
+                if (!data[1].data.children.length) {
                     UI.feedbackText('No comments to load', UI.FEEDBACK_NEGATIVE, 3000, UI.DISPLAY_CURSOR);
                     $body.removeClass('rd-overlayLoading');
                     return;
@@ -51,11 +52,12 @@
 
                 utils.commentSection({
                     commentArray: data[1].data.children,
-                    modOverride: options.modOverride
-                }, (result) => {
+                    modOverride: options.modOverride,
+                }, result => {
                     const title = DOMPurify.sanitize(data[0].data.children[0].data.title);
-                    const $overlay = UI.overlay(title, `<div id="rd-commentCount">${result.length} comment${result.length > 1 ? `s` : ``}</div>`, false);
+                    const $overlay = UI.overlay(title, `<div id="rd-commentCount">${result.length} comment${result.length > 1 ? 's' : ''}</div>`, false);
                     const $content = $overlay.find('#rd-mainTextContent');
+
                     result.forEach((comment, index) => {
                         const $storyHTML = $(`
                             <div id="rd-comment-${index}" class="rd-comment">
@@ -72,7 +74,7 @@
                             $content.append($storyHTML);
                             $content.find(`#rd-comment-${index}`).readingTime({
                                 readingTimeTarget: '.rd-eta',
-                                wordCountTarget: '.rd-words'
+                                wordCountTarget: '.rd-words',
                             });
                         });
                     });
@@ -81,8 +83,8 @@
         });
     }
 
-    function addIcon() {
-        chrome.storage.local.get(['fontFamily', 'fontSize', 'textWidth', 'lineHeight', 'colorMode', 'seenVersion', 'textAlign'], function(result) {
+    function addIcon () {
+        chrome.storage.local.get(['fontFamily', 'fontSize', 'textWidth', 'lineHeight', 'colorMode', 'seenVersion', 'textAlign'], result => {
             utils.currentSettings.fontFamily = result.fontFamily || utils.defaultSettings.fontFamily;
             utils.currentSettings.fontSize = result.fontSize || utils.defaultSettings.fontSize;
             utils.currentSettings.textWidth = result.textWidth || utils.defaultSettings.textWidth;
@@ -92,8 +94,8 @@
             utils.currentSettings.seenVersion = result.seenVersion || utils.defaultSettings.seenVersion;
             utils.currentSettings.textAlign = result.textAlign || utils.defaultSettings.textAlign;
 
-            if(utils.manifest.version !== utils.currentSettings.seenVersion) {
-                $body.addClass(`rd-updated`);
+            if (utils.manifest.version !== utils.currentSettings.seenVersion) {
+                $body.addClass('rd-updated');
             }
             $body.addClass(`rd-${utils.currentSettings.colorMode}`);
 
@@ -167,15 +169,15 @@
         });
     }
 
-    function readLinkComments() {
+    function readLinkComments () {
         const $things = $('.thing.comment:not(.rd-seen)');
         $things.viewportChecker({
             classToAdd: 'rd-seen',
-            callbackFunction: function(thing) {
+            callbackFunction (thing) {
                 const $thing = $(thing);
                 const permalink = $thing.find('a.bylink').attr('href') || $thing.find('.buttons:first .first a').attr('href');
                 const author = $thing.find('.author:first').text();
-                if(author) {
+                if (author) {
                     requestAnimationFrame(() => {
                         $thing.find('.flat-list.buttons').eq(0).append(`
                             <li class="rd-flatlistButton">
@@ -184,14 +186,13 @@
                         `);
                     });
                 }
-
-            }
+            },
         });
     }
 
-    function readLinkCommentsRedesign() {
+    function readLinkCommentsRedesign () {
         console.log('readLinkCommentsRedesign fired');
-        redesignListener.on('comment', function(e) {
+        redesignListener.on('comment', e => {
             const $target = $(e.target);
             const commentID = e.detail.data.id.substring(3);
             const postID = e.detail.data.post.id.substring(3);
@@ -201,50 +202,49 @@
             $target.append(`<a href="javascript:;" class="rd-commentReadRedesign" data-permalink="${permalink}">read</a>`);
         });
 
-        $body.on('click', '.rd-commentReadRedesign', function() {
+        $body.on('click', '.rd-commentReadRedesign', function () {
             const permalink = $(this).attr('data-permalink');
-            activateSelfPostOverlay({type: 'comments', permalink: permalink, modOverride: true});
+            activateSelfPostOverlay({type: 'comments', permalink, modOverride: true});
         });
     }
 
-    function removeIcon() {
+    function removeIcon () {
         $body.find('#rd-readIcon').remove();
     }
 
     // Show the read icon when we are viewing a post.
 
-    function initCheck() {
+    function initCheck () {
         const samePage = locationPathname === location.pathname;
         if (!samePage) {
             locationPathname = location.pathname;
 
-            if(utils.pathRegex.test(locationPathname)) {
+            if (utils.pathRegex.test(locationPathname)) {
                 addIcon();
 
                 // We are on old reddit, start watching for future comments.
-                if($('#header').length) {
+                if ($('#header').length) {
                     utils.domObserver();
-                    window.addEventListener('rDNewThings', function () {
+                    window.addEventListener('rDNewThings', () => {
                         readLinkComments();
                     });
                 }
 
                 // Check if we are on old reddit and have comments that might need to be watched.
-                if($('.thing.comment').length) {
+                if ($('.thing.comment').length) {
                     readLinkComments();
-                    $body.on('click', '.rd-commentRead', function() {
+                    $body.on('click', '.rd-commentRead', function () {
                         const permalink = $(this).attr('data-permalink');
-                        activateSelfPostOverlay({type: 'comments', permalink: permalink, modOverride: true});
+                        activateSelfPostOverlay({type: 'comments', permalink, modOverride: true});
                     });
-
                 }
             } else {
                 removeIcon();
             }
         }
         // This is done so that this also works properly on reddit redesign.
-        if(!$('#header').length) {
-            if(firstInit) {
+        if (!$('#header').length) {
+            if (firstInit) {
                 console.log('first init');
                 redesignListener.start();
                 readLinkCommentsRedesign();
@@ -252,7 +252,6 @@
             }
             requestAnimationFrame(initCheck);
         }
-
     }
     initCheck();
 })();

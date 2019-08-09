@@ -1,8 +1,9 @@
+'use strict';
 /** @namespace  UI */
 (function (UI) {
-    //--------
+    // --------
     // Constants
-    //--------
+    // --------
     const $body = $('body');
     UI.FEEDBACK_NEUTRAL = 'neutral';
     UI.FEEDBACK_POSITIVE = 'positive';
@@ -12,10 +13,10 @@
     UI.DISPLAY_BOTTOM = 'bottom';
     UI.DISPLAY_CURSOR = 'cursor';
 
-    //--------
+    // --------
     // Overlay
-    //--------
-    UI.overlay = function(title, content, readTimeElement, textOptions) {
+    // --------
+    UI.overlay = function (title, content, readTimeElement, textOptions) {
         const colorMode = utils.currentSettings.colorMode;
 
         const $overlay = $(`
@@ -44,9 +45,9 @@
         `);
         $overlay.find('#rd-mainTextContent').append(content);
 
-        if(textOptions) {
+        if (textOptions) {
             const $textOptions = $overlay.find('#rd-textOptions');
-            textOptions.forEach((option) => {
+            textOptions.forEach(option => {
                 const optionHTML = `<div id="rd-option-${option.name}">${option.content}</div>`;
                 $textOptions.append(optionHTML);
             });
@@ -54,10 +55,10 @@
         requestAnimationFrame(() => {
             $body.append($overlay);
 
-            if(readTimeElement) {
+            if (readTimeElement) {
                 $overlay.find(readTimeElement).readingTime({
                     readingTimeTarget: '.rd-eta',
-                    wordCountTarget: '.rd-words'
+                    wordCountTarget: '.rd-words',
                 });
             }
         });
@@ -66,36 +67,36 @@
         $body.addClass('rd-overlayActive');
 
         // Handle overlay closing
-        $overlay.on('click', '#rd-closeOverlay, #rd-doneButton', function() {
+        $overlay.on('click', '#rd-closeOverlay, #rd-doneButton', () => {
             $overlay.remove();
             $body.removeClass('rd-overlayActive');
         });
 
-        $(document).keyup(function(e) {
-            if (e.key === `Escape`) { // escape key maps to keycode `27`
+        $(document).keyup(e => {
+            if (e.key === 'Escape') { // escape key maps to keycode `27`
                 $overlay.remove();
                 $body.removeClass('rd-overlayActive');
             }
         });
 
         // Open settomgs
-        $overlay.on('click', '#rd-settings', function() {
+        $overlay.on('click', '#rd-settings', () => {
             chrome.runtime.sendMessage({
-                action: 'openOptions'
+                action: 'openOptions',
             });
         });
 
         // Handle color mode change. Needs to be redone if more themes are added as this does not scale at all.
-        $overlay.on('click', '#rd-colorMode', function() {
+        $overlay.on('click', '#rd-colorMode', function () {
             const $this = $(this);
-            if($this.attr('data-mode') === 'light') {
-                chrome.storage.local.set({'colorMode': 'dark'});
+            if ($this.attr('data-mode') === 'light') {
+                chrome.storage.local.set({colorMode: 'dark'});
                 utils.currentSettings.colorScheme = 'dark';
                 $body.removeClass('rd-light');
                 $body.addClass('rd-dark');
                 $this.attr('data-mode', 'dark');
             } else {
-                chrome.storage.local.set({'colorMode': 'light'});
+                chrome.storage.local.set({colorMode: 'light'});
                 utils.currentSettings.colorScheme = 'light';
                 $body.removeClass('rd-dark');
                 $body.addClass('rd-light');
@@ -107,10 +108,10 @@
         return $overlay;
     };
 
-    //--------
+    // --------
     // Feedback popup.
-    //--------
-    UI.feedbackText = function(feedbackText, feedbackKind, displayDuration, displayLocation) {
+    // --------
+    UI.feedbackText = function (feedbackText, feedbackKind, displayDuration, displayLocation) {
         if (!displayLocation) {
             displayLocation = UI.DISPLAY_CENTER;
         }
@@ -127,32 +128,32 @@
 
             switch (displayLocation) {
             case UI.DISPLAY_CENTER: {
-                const feedbackLeftMargin = ($feedbackWindow.outerWidth() / 2),
-                    feedbackTopMargin = ($feedbackWindow.outerHeight() / 2);
+                const feedbackLeftMargin = $feedbackWindow.outerWidth() / 2,
+                      feedbackTopMargin = $feedbackWindow.outerHeight() / 2;
 
                 $feedbackWindow.css({
                     'margin-left': `-${feedbackLeftMargin}px`,
-                    'margin-top': `-${feedbackTopMargin}px`
+                    'margin-top': `-${feedbackTopMargin}px`,
                 });
             }
                 break;
             case UI.DISPLAY_BOTTOM:
                 $feedbackWindow.css({
-                    'left': '5px',
-                    'bottom': '40px',
-                    'top': 'auto',
-                    'position': 'fixed'
+                    left: '5px',
+                    bottom: '40px',
+                    top: 'auto',
+                    position: 'fixed',
                 });
                 break;
             case UI.DISPLAY_CURSOR: {
-                $(document).mousemove(function (e) {
+                $(document).mousemove(e => {
                     const posX = e.pageX,
-                        posY = e.pageY;
+                          posY = e.pageY;
 
                     $feedbackWindow.css({
                         left: posX - $feedbackWindow.width() + 155,
                         top: posY - $feedbackWindow.height() - 15,
-                        'position': 'fixed'
+                        position: 'fixed',
                     });
                 });
             }
@@ -163,4 +164,4 @@
             $feedbackWindow.delay(displayDuration ? displayDuration : 3000).fadeOut();
         }
     };
-}(UI = window.UI || {}));
+})(window.UI = window.UI || {});
