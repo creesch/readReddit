@@ -1,9 +1,15 @@
 'use strict';
 (function () {
     const currentSettings = {};
-    chrome.storage.local.get(['fontFamily', 'fontSize', 'textWidth', 'lineHeight', 'colorMode', 'textAlign'], result => {
+    chrome.storage.local.get(['fontFamily', 'fontSize', 'textWidth', 'lineHeight', 'colorMode', 'textAlign', 'collectInlineLinks', 'openRedditLinksInOverlay'], result => {
         currentSettings.colorMode = result.colorMode || utils.defaultSettings.colorMode;
         $('#rd-colorMode').val(currentSettings.colorMode);
+
+        currentSettings.collectInlineLinks = result.collectInlineLinks === undefined ? utils.defaultSettings.collectInlineLinks : result.collectInlineLinks;
+        $('#rd-collectInlineLinks').prop('checked', currentSettings.collectInlineLinks);
+
+        currentSettings.openRedditLinksInOverlay = result.openRedditLinksInOverlay === undefined ? utils.defaultSettings.openRedditLinksInOverlay : result.openRedditLinksInOverlay;
+        $('#rd-openRedditLinksInOverlay').prop('checked', currentSettings.openRedditLinksInOverlay);
 
         currentSettings.fontFamily = result.fontFamily || utils.defaultSettings.fontFamily;
         $('#rd-fontFamily').val(currentSettings.fontFamily);
@@ -23,6 +29,10 @@
 
     $('#rd-save').on('click', () => {
         currentSettings.colorMode = $('#rd-colorMode').val() || utils.defaultSettings.colorMode;
+
+        currentSettings.collectInlineLinks = $('#rd-collectInlineLinks').prop('checked');
+
+        currentSettings.openRedditLinksInOverlay = $('#rd-openRedditLinksInOverlay').prop('checked');
 
         currentSettings.fontFamily = $('#rd-fontFamily').val() || utils.defaultSettings.fontFamily;
 

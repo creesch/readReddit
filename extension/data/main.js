@@ -3,6 +3,7 @@
     const $body = $('body');
     let locationPathname;
     let firstInit = true;
+    let $activeOverlay;
 
     // Show the overlay with readable text.
     function activateSelfPostOverlay (options) {
@@ -38,7 +39,15 @@
                     ${continuedInComments}
                     `;
 
-                    UI.overlay(title, content, '#rd-mainTextContent');
+                    const $overlay = UI.overlay(title, content, '#rd-mainTextContent');
+
+                    if (options.update) {
+                        $activeOverlay.remove();
+                    }
+                    $activeOverlay = $overlay;
+                    const $content = $overlay.find('#rd-mainTextContent');
+
+                    UI.processInlineLinks($content);
                 });
             }
 
@@ -56,6 +65,10 @@
                 }, result => {
                     const title = DOMPurify.sanitize(data[0].data.children[0].data.title);
                     const $overlay = UI.overlay(title, `<div id="rd-commentCount">${result.length} comment${result.length > 1 ? 's' : ''}</div>`, false);
+                    if (options.update) {
+                        $activeOverlay.remove();
+                    }
+                    $activeOverlay = $overlay;
                     const $content = $overlay.find('#rd-mainTextContent');
 
                     result.forEach((comment, index) => {
@@ -76,6 +89,7 @@
                                 readingTimeTarget: '.rd-eta',
                                 wordCountTarget: '.rd-words',
                             });
+                            UI.processInlineLinks($storyHTML);
                         });
                     });
                 });
@@ -83,14 +97,57 @@
         });
     }
 
+    // Open reddit links automatically in overlay.
+    $body.on('click', '.rd-reddit-url', event => {
+        // Only open links if the appropriate setting is enabled.
+        if (!utils.currentSettings.openRedditLinksInOverlay) {
+            return;
+        }
+        // Do not act when the link is supposed to be opened in the tab.
+        if (event.ctrlKey || event.metaKey) {
+            return;
+        }
+
+        // relevant data.
+        const $linkElement = $(event.target);
+        const linkType = $linkElement.data('linkType');
+        const postID = $linkElement.data('postID');
+        let permalink;
+
+        // Make sure we actually have the data we need.
+        if (linkType !== 'post' && linkType !== 'comments') {
+            return;
+        }
+
+        // At this point we can disable the default behavior and hand it over to the overlay.
+        event.preventDefault();
+
+        if (linkType === 'post') {
+            permalink = `https://old.reddit.com/comments/${postID}`;
+        }
+
+        if (linkType === 'comments') {
+            const commentID = $linkElement.data('commentID');
+            permalink = `https://old.reddit.com/comments/${postID}/-/${commentID}`;
+        }
+
+        activateSelfPostOverlay({
+            type: linkType,
+            update: true,
+            permalink,
+        });
+    });
+
     function addIcon () {
-        chrome.storage.local.get(['fontFamily', 'fontSize', 'textWidth', 'lineHeight', 'colorMode', 'seenVersion', 'textAlign'], result => {
+        chrome.storage.local.get(['fontFamily', 'fontSize', 'textWidth', 'lineHeight', 'colorMode', 'seenVersion', 'textAlign', 'collectInlineLinks', 'openRedditLinksInOverlay'], result => {
             utils.currentSettings.fontFamily = result.fontFamily || utils.defaultSettings.fontFamily;
             utils.currentSettings.fontSize = result.fontSize || utils.defaultSettings.fontSize;
             utils.currentSettings.textWidth = result.textWidth || utils.defaultSettings.textWidth;
             utils.currentSettings.textWidth = result.textWidth || utils.defaultSettings.textWidth;
             utils.currentSettings.lineHeight = result.lineHeight || utils.defaultSettings.lineHeight;
             utils.currentSettings.colorMode = result.colorMode || utils.defaultSettings.colorMode;
+            utils.currentSettings.collectInlineLinks = result.collectInlineLinks === undefined ? utils.defaultSettings.collectInlineLinks : result.collectInlineLinks;
+            utils.currentSettings.openRedditLinksInOverlay = result.openRedditLinksInOverlay === undefined ? utils.defaultSettings.openRedditLinksInOverlay : result.openRedditLinksInOverlay;
             utils.currentSettings.seenVersion = result.seenVersion || utils.defaultSettings.seenVersion;
             utils.currentSettings.textAlign = result.textAlign || utils.defaultSettings.textAlign;
 

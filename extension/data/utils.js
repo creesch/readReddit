@@ -4,6 +4,7 @@
     utils.manifest = chrome.runtime.getManifest();
     utils.mdRegex = /<div class="md">([\s\S]*?)<\/div>/m;
     utils.pathRegex = /^\/(r|user)\/[^/]*?\/comments\/[^/]*?\//;
+    utils.redditLinkRegex = /(?:^|reddit\.com)\/(?:r|user)\/[^/]*?\/comments\/([^/]+)\/?(?:[^/]+\/)?([^?/]+)?/;
 
     utils.defaultSettings = {
         fontFamily: 'Verdana,Geneva,sans-serif',
@@ -11,6 +12,8 @@
         textWidth: '45em',
         lineHeight: '1.4em',
         colorMode: 'light',
+        collectInlineLinks: true,
+        openRedditLinksInOverlay: true,
         seenVersion: 'none',
         textAlign: 'left',
     };

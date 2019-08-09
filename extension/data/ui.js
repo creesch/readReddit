@@ -164,4 +164,45 @@
             $feedbackWindow.delay(displayDuration ? displayDuration : 3000).fadeOut();
         }
     };
+
+    // --------
+    // Process inline links in an element.
+    // --------
+    UI.processInlineLinks = function ($textBlock) {
+        const $aElements = $textBlock.find('a:not(.rd-commentLink)');
+        const collectInlineLinks = utils.currentSettings.collectInlineLinks;
+
+        if ($aElements.length) {
+            let $inlineLinks;
+            if (collectInlineLinks) {
+                $inlineLinks = $('<ul class="rd-inlineLinks">').appendTo($textBlock);
+            }
+
+            $aElements.each(function () {
+                const $this = $(this);
+                const href = $this.attr('href');
+                const thisRedditHref = href.match(utils.redditLinkRegex);
+
+                if (thisRedditHref && thisRedditHref[2]) {
+                    $this.data('linkType', 'comments');
+                    $this.data('postID', thisRedditHref[1]);
+                    $this.data('commentID', thisRedditHref[2]);
+                    $this.addClass('rd-reddit-url');
+                } else if (thisRedditHref) {
+                    $this.data('linkType', 'post');
+                    $this.data('postID', thisRedditHref[1]);
+                    $this.addClass('rd-reddit-url');
+                } else if (href.startsWith('https://redd.it/')) {
+                    $this.data('linkType', 'post');
+                    $this.data('postID', href.replace('https://redd.it/', ''));
+                    $this.addClass('rd-reddit-url');
+                }
+
+                if (collectInlineLinks) {
+                    const $thisClone = $this.clone(true);
+                    $inlineLinks.append($('<li>').append($thisClone));
+                }
+            });
+        }
+    };
 })(window.UI = window.UI || {});

@@ -296,9 +296,21 @@ body.rd-overlayActive {
 
 .rd-overlayActive .rd-comment {
     margin-bottom: 10em;
-  }
-/* Set up all the text styling in such a way that there is (hopefully) minimal disruption from subreddit styles */
+}
 
+/* Inline links styling */
+.rd-overlayActive #rd-textOverlay ul.rd-inlineLinks li {
+    font-size: 0.7em;
+}
+
+.rd-overlayActive #rd-textOverlay ul.rd-inlineLinks {
+    list-style: circle;
+    border-top: solid 1px rgba(128, 128, 128, 0.28);
+    padding-top: 15px;
+    margin-top: 15px;
+}
+
+/* Set up all the text styling in such a way that there is (hopefully) minimal disruption from subreddit styles */
 .rd-overlayActive #rd-textOverlay p {
     font-family: inherit;
     font-size: inherit;
@@ -386,7 +398,6 @@ body.rd-overlayActive {
 }
 
 /* code block */
-
 .rd-overlayActive #rd-textOverlay pre {
     font-size: inherit;
     border: 0;
