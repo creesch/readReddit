@@ -109,7 +109,7 @@
         }
 
         // relevant data.
-        const $linkElement = $(event.target);
+        const $linkElement = $(event.currentTarget);
         const linkType = $linkElement.data('linkType');
         const postID = $linkElement.data('postID');
         let permalink;
