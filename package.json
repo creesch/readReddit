@@ -4,7 +4,8 @@
   "private": true,
   "description": "readReddit adds a pleasant & clutter free reading mode for reddit text posts and comments. ",
   "scripts": {
-    "build": "node build.js"
+    "build": "node build.js",
+    "eslint": "eslint . --config .eslintrc.json --ignore-path .eslintignore"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   "homepage": "https://github.com/creesch/readReddit#readme",
   "dependencies": {
     "archiver": "^3.1.1",
+    "eslint": "^7.11.0",
     "yargs": "^13.3.0"
   }
 }
