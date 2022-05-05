@@ -64,6 +64,7 @@
         });
 
         $body.removeClass('rd-overlayLoading');
+        document.body.style.cursor = '';
         $body.addClass('rd-overlayActive');
 
         // Handle overlay closing

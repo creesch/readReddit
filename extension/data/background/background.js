@@ -1,57 +1,48 @@
-const mdRegex = /<div class="md">([\s\S]*?)<\/div>/m;
-function commentChainDigger (commentArray, authorName, modOverride) {
-    let comments = '';
-    // Probably not needed at all, but let's make extra sure things are in posting order.
-    commentArray.sort((a, b) => a.data.created_utc - b.data.created_utc);
+'use strict';
 
-    commentArray.forEach(comment => {
-        if (comment.kind !== 't1' && comment.data.banned_by || comment.data.author !== authorName) {
-            return;
+/**
+ * Creates a URL query string from the given parameters.
+ * @function
+ * @param {object} parameters An object of parameters
+ * @returns {string}
+ */
+function queryString (parameters) {
+    if (!parameters) {
+        return '';
+    }
+    const kvStrings = [];
+    for (const [k, v] of Object.entries(parameters)) {
+        if (v !== undefined && v !== null) {
+            kvStrings.push(`${encodeURIComponent(k)}=${encodeURIComponent(v)}`);
         }
-
-        if ((comment.data.stickied || comment.data.distinguished) && !modOverride) {
-            return;
-        }
-        const selfTextHTML = `
-        <span class="rd-commentText">
-            ${DOMPurify.sanitize(comment.data.body_html.match(mdRegex)[1])}
-        </span>
-        `;
-        comments = `${comments}${selfTextHTML}`;
-
-        if (comment.data.replies) {
-            comments = `${comments}${commentChainDigger(comment.data.replies.data.children, authorName)}`;
-        }
-    });
-
-    return comments;
+    }
+    if (!kvStrings.length) {
+        return '';
+    }
+    return `?${kvStrings.join('&')}`;
 }
 
-function commentSection (commentArray, modOverride) {
-    const returnArray = [];
+function doFetch (url, options, callback) {
+    let query = queryString(options);
+    // If we have a query object and additional parameters in the endpoint, we
+    // just stick the object parameters on the end with `&` instead of `?`, and
+    // duplicate keys in the final URL are fine (consistent with jQuery)
+    if (url.includes('?')) {
+        query = query.replace('?', '&');
+    }
 
-    commentArray.forEach(comment => {
-        const commentAuthor = comment.data.author;
-        if (comment.kind !== 't1' || commentAuthor === '[deleted]' || comment.data.banned_by) {
-            return;
-        }
-        if ((comment.data.stickied || comment.data.distinguished) && !modOverride) {
-            return;
-        }
+    const fetchURL = `${url}${query}`;
 
-        let returnText = DOMPurify.sanitize(comment.data.body_html.match(mdRegex)[1]);
-        if (comment.data.replies) {
-            returnText = `${returnText}${commentChainDigger(comment.data.replies.data.children, commentAuthor, modOverride)}`;
-        }
+    const fetchOptions = {
+        credentials: 'include', // required for cookies to be sent
+        redirect: 'error', // prevents strange reddit API shenanigans
+        method: 'GET',
+        cache: 'no-store',
+    };
 
-        returnArray.push({
-            author: commentAuthor,
-            text: returnText,
-            permalink: comment.data.permalink,
-        });
-    });
-
-    return returnArray;
+    fetch(fetchURL, fetchOptions)
+        .then(response => response.json())
+        .then(callback);
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
@@ -81,22 +72,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         const url = request.details.url;
         const options = request.details.options;
 
-        $.getJSON(url, options).done(data => {
+        doFetch(url, options, data => {
+            console.log(data);
             sendResponse(data);
         });
-    }
-
-    if (request.action === 'commentChainDigger') {
-        const commentArray = request.details.commentArray;
-        const authorName = request.details.authorName;
-        sendResponse({comments: commentChainDigger(commentArray, authorName)});
-    }
-
-    if (request.action === 'commentSection') {
-        const commentArray = request.details.commentArray;
-        const modOverride = request.details.modOverride;
-        const returnArray = commentSection(commentArray, modOverride);
-        sendResponse({comments: returnArray});
     }
 
     if (request.action === 'openOptions') {
