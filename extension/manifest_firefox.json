@@ -1,5 +1,5 @@
 {
-    "manifest_version": 3,
+    "manifest_version": 2,
     "name": "readReddit, Readable text posts on reddit",
     "author": "Creesch",
     "short_name": "readReddit",
@@ -16,11 +16,9 @@
         }
     },
     "permissions": [
+        "https://*.reddit.com/",
         "storage",
         "tabs"
-    ],
-    "host_permissions": [
-        "https://*.reddit.com/"
     ],
     "icons": {
         "16": "data/images/icon16.png",
@@ -28,7 +26,10 @@
         "128": "data/images/icon128.png"
     },
     "background": {
-        "service_worker": "data/background/background.js"
+        "scripts": [
+            "data/background/background.js"
+        ],
+        "persistent": false
     },
     "content_scripts": [
         {
@@ -55,14 +56,8 @@
         }
     ],
     "web_accessible_resources": [
-        {
-            "resources": [
-                "/data/images/icon48.png",
-                "/data/images/moon25.png",
-                "/data/images/sun25.png"
-            ],
-            "matches": ["<all_urls>"]
-        }
-
+        "/data/images/icon48.png",
+        "/data/images/moon25.png",
+        "/data/images/sun25.png"
     ]
 }
