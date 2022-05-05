@@ -39,3 +39,15 @@ Some things I might build in the future.
 
 
 - Custom themes
+
+
+# Build instructions: 
+
+- [Download](https://nodejs.org/en/download/) and install nodeJS (Instructions written when LTS Version: 16.15.0  was the current version )
+- From a commandline terminal run `npm install` from the root directory of this repository. 
+- From a commandline terminal run `npm run build`
+- A `build` directory will be created containing the following: 
+    - `firefox` directory containing the unpackaged extension for firefox
+    - `readReddit_vX.X.X_firefox.zip` file containing the packaged extension for firefox.
+    - `chrome` directory containing the unpackaged extension for chrome and chromium based browsers.
+    - `readReddit_vX.X.X_chrome.zip` file containing the packaged extension for chrome and chromium based browsers.
