@@ -79,25 +79,60 @@
     };
 
     // Digg through a comment chain to attach all comments by OP
-    utils.commentChainDigger = function (commentArray, authorName, callback) {
-        chrome.runtime.sendMessage({
-            action: 'commentChainDigger',
-            details: {
-                commentArray,
-                authorName,
-            },
-        }, response => callback(response.comments));
+    utils.commentChainDigger = function (commentArray, authorName, modOverride) {
+        let comments = '';
+        // Probably not needed at all, but let's make extra sure things are in posting order.
+        commentArray.sort((a, b) => a.data.created_utc - b.data.created_utc);
+
+        commentArray.forEach(comment => {
+            if (comment.kind !== 't1' && comment.data.banned_by || comment.data.author !== authorName) {
+                return;
+            }
+
+            if ((comment.data.stickied || comment.data.distinguished) && !modOverride) {
+                return;
+            }
+            const selfTextHTML = `
+            <span class="rd-commentText">
+                ${DOMPurify.sanitize(comment.data.body_html.match(utils.mdRegex)[1])}
+            </span>
+            `;
+            comments = `${comments}${selfTextHTML}`;
+
+            if (comment.data.replies) {
+                comments = `${comments}${utils.commentChainDigger(comment.data.replies.data.children, authorName)}`;
+            }
+        });
+
+        return comments;
     };
 
     // Go through all top level comments provided digg through the chain for each.
-    utils.commentSection = function (options, callback) {
-        chrome.runtime.sendMessage({
-            action: 'commentSection',
-            details: {
-                commentArray: options.commentArray,
-                modOverride: options.modOverride,
-            },
-        }, response => callback(response.comments));
+    utils.commentSection = function (commentArray, modOverride) {
+        const returnArray = [];
+
+        commentArray.forEach(comment => {
+            const commentAuthor = comment.data.author;
+            if (comment.kind !== 't1' || commentAuthor === '[deleted]' || comment.data.banned_by) {
+                return;
+            }
+            if ((comment.data.stickied || comment.data.distinguished) && !modOverride) {
+                return;
+            }
+
+            let returnText = comment.data.body_html.match(utils.mdRegex)[1];
+            if (comment.data.replies) {
+                returnText = `${returnText}${utils.commentChainDigger(comment.data.replies.data.children, commentAuthor, modOverride)}`;
+            }
+
+            returnArray.push({
+                author: commentAuthor,
+                text: returnText,
+                permalink: comment.data.permalink,
+            });
+        });
+
+        return returnArray;
     };
 
     function dismissUpdate () {

@@ -31,7 +31,7 @@
     font-size: 11px;
     border-radius: 5px;
 
-    transition-property:background;
+    transition-property: background;
     transition-duration: 500ms;
     transition-timing-function: linear;
 }
@@ -195,6 +195,10 @@ body.rd-overlayLoading #rd-readIcon {
     to {
         transform:rotate(360deg);
     }
+}
+
+body.rd-overlayLoading a.rd-reddit-url {
+    cursor: wait;
 }
 
 body.rd-overlayActive #rd-readButton {
